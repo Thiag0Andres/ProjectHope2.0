@@ -1,17 +1,7 @@
 import React from "react";
 
-import {
-  StyleSheet,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  AsyncStorage,
-  Alert,
-  ScrollView,
-} from "react-native";
+import { Image, TextInput, Text, View, ScrollView } from "react-native";
+import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styles";
@@ -28,8 +18,11 @@ const ChangePassword = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ padding: 25, paddingVertical: 100 }}
+    >
+      <BorderlessButton
         style={styles.buttonArrow}
         onPress={handleNavigateToLogin}
       >
@@ -37,9 +30,11 @@ const ChangePassword = () => {
           style={styles.backArrow}
           source={require("../../icons/arrow.png")}
         />
-      </TouchableOpacity>
+      </BorderlessButton>
 
-      <Image style={styles.logo} source={require("../../icons/logo3.png")} />
+      <View style={styles.containerLogo}>
+        <Image style={styles.logo} source={require("../../icons/logo3.png")} />
+      </View>
 
       <View>
         <TextInput
@@ -56,10 +51,10 @@ const ChangePassword = () => {
         ></TextInput>
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <RectButton style={styles.button}>
         <Text style={styles.buttonText}>REDEFINIR SENHA</Text>
-      </TouchableOpacity>
-    </View>
+      </RectButton>
+    </ScrollView>
   );
 };
 

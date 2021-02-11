@@ -1,16 +1,7 @@
 import React from "react";
 
-import {
-  Image,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  Text,
-  View,
-  AsyncStorage,
-  KeyboardAvoidingView,
-  Alert,
-} from "react-native";
+import { Image, TextInput, Text, View, ScrollView } from "react-native";
+import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styles";
@@ -27,8 +18,11 @@ const ForgotPassword = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ padding: 25, paddingVertical: 100 }}
+    >
+      <BorderlessButton
         style={styles.buttonArrow}
         onPress={handleNavigateToLogin}
       >
@@ -36,9 +30,11 @@ const ForgotPassword = () => {
           style={styles.backArrow}
           source={require("../../icons/arrow.png")}
         />
-      </TouchableOpacity>
+      </BorderlessButton>
 
-      <Image style={styles.logo} source={require("../../icons/logo3.png")} />
+      <View style={styles.containerLogo}>
+        <Image style={styles.logo} source={require("../../icons/logo3.png")} />
+      </View>
 
       <TextInput
         placeholder="Digite seu email para envio do código"
@@ -46,13 +42,13 @@ const ForgotPassword = () => {
         style={styles.placeholder}
       ></TextInput>
 
-      <TouchableOpacity
+      <RectButton
         style={styles.button}
         onPress={handleNavigateToChangePassword}
       >
         <Text style={styles.buttonText}>ENVIAR CÓDIGO</Text>
-      </TouchableOpacity>
-    </View>
+      </RectButton>
+    </ScrollView>
   );
 };
 

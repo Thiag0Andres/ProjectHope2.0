@@ -3,13 +3,20 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 100,
     backgroundColor: "#FFF",
+    position: "relative",
+  },
+
+  containerLogo: {
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    position: "relative",
+    marginBottom: 30,
+  },
+
+  logo: {
+    width: 320,
+    height: 180,
   },
 
   buttonArrow: {
@@ -25,12 +32,6 @@ export const styles = StyleSheet.create({
     height: 40,
   },
 
-  logo: {
-    width: 400,
-    height: 180,
-    marginBottom: 30,
-  },
-
   errorText: {
     color: "#c4342d",
     fontSize: 14,
@@ -38,7 +39,6 @@ export const styles = StyleSheet.create({
   },
 
   placeholder: {
-    width: 320,
     marginTop: 20,
     padding: 8,
     fontSize: 14,
@@ -47,7 +47,6 @@ export const styles = StyleSheet.create({
   },
 
   button: {
-    width: 320,
     height: 40,
     marginTop: 50,
     display: "flex",

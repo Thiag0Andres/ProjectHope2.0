@@ -3,55 +3,30 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 100,
     backgroundColor: "#FFF",
+  },
+
+  containerLogo: {
     display: "flex",
-    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  logo: {
+    width: 320,
+    height: 180,
+  },
+
+  containerLogin: {
+    marginTop: 60,
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
   },
 
-  containeriInputs: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  containerSingupButton: {
-    marginTop: 30,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  containerNewAccount: {
-    marginTop: 60,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  containerLogin: {
-    width: 320,
-    marginTop: 60,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-
-  logo: {
-    width: 400,
-    height: 180,
-  },
-
   singupButton: {
-    width: 320,
+    marginTop: 30,
     height: 40,
-    display: "flex",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 9,
@@ -71,7 +46,6 @@ export const styles = StyleSheet.create({
   },
 
   placeholder: {
-    width: 320,
     padding: 8,
     fontSize: 14,
     marginTop: 20,

@@ -3,39 +3,17 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 100,
-    backgroundColor: "#FFF",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "space-around",
+    backgroundColor: "#fff",
   },
 
-  containeriInputs: {
+  containerLogo: {
     display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  containerLoginButton: {
-    marginTop: 30,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  containerNewAccount: {
-    marginTop: 60,
-    display: "flex",
-    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
   },
 
   logo: {
-    width: 400,
+    width: 320,
     height: 180,
   },
 
@@ -46,7 +24,6 @@ export const styles = StyleSheet.create({
   },
 
   input: {
-    width: 320,
     marginTop: 20,
     padding: 8,
     fontSize: 14,
@@ -55,7 +32,7 @@ export const styles = StyleSheet.create({
   },
 
   loginButton: {
-    width: 320,
+    marginTop: 30,
     height: 40,
     display: "flex",
     alignItems: "center",
@@ -71,10 +48,21 @@ export const styles = StyleSheet.create({
     color: "#FFF",
   },
 
+  buttonForgotPassword: {
+    height: 40,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+
   textForgotPassword: {
     fontSize: 14,
     fontWeight: "bold",
     color: "#979696",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   newUser: {
@@ -89,7 +77,6 @@ export const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: 320,
     height: 40,
     marginTop: 15,
     borderRadius: 9,
