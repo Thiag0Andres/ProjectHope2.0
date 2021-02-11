@@ -1,10 +1,19 @@
 import React from "react";
 
 import { Image, TextInput, TouchableOpacity, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styles";
 
 const LoginScreen = () => {
+  const navigation = useNavigation();
+
+  const handleNavigateToCreateAccount = () => {
+    navigation.navigate("SingupScreen");
+  };
+
+  const handleNavigateToForgotPassword = () => {};
+
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../icons/logo3.png")} />
@@ -35,7 +44,10 @@ const LoginScreen = () => {
 
       <View style={styles.containerNewAccount}>
         <Text style={styles.newUser}>NÃO POSSUI CONTA?</Text>
-        <TouchableOpacity style={styles.newUserButton} onPress={() => {}}>
+        <TouchableOpacity
+          style={styles.newUserButton}
+          onPress={handleNavigateToCreateAccount}
+        >
           <Text style={styles.textNewUser}>CRIAR NOVA CONTA</Text>
         </TouchableOpacity>
       </View>

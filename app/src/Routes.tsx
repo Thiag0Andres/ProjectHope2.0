@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "./pages/LoginScreen";
+import SingupScreen from "./pages/SingupScreen";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -12,6 +13,7 @@ const Routes = () => {
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
         <Screen name="LoginScreen" component={LoginScreen} />
+        <Screen name="SingupScreen" component={SingupScreen} />
       </Navigator>
     </NavigationContainer>
   );

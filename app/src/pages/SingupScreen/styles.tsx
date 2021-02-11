@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  containerLoginButton: {
+  containerSingupButton: {
     marginTop: 30,
     display: "flex",
     flexDirection: "column",
@@ -34,74 +34,72 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
+  containerLogin: {
+    width: 320,
+    marginTop: 60,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
   logo: {
     width: 400,
     height: 180,
   },
 
-  textError: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#CC0000",
-  },
-
-  input: {
-    width: 320,
-    marginTop: 20,
-    padding: 8,
-    fontSize: 14,
-    borderColor: "#E3E3E3",
-    borderBottomWidth: 1.5,
-  },
-
-  loginButton: {
+  singupButton: {
     width: 320,
     height: 40,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
-    backgroundColor: "#4507A1",
     borderRadius: 9,
+    backgroundColor: "#4507A1",
   },
 
-  textLoginButton: {
-    fontSize: 14,
-    fontWeight: "bold",
+  textSingupButton: {
     color: "#FFF",
-  },
-
-  textForgotPassword: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#979696",
+  },
+
+  errorText: {
+    color: "#c4342d",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+
+  placeholder: {
+    width: 320,
+    padding: 8,
+    fontSize: 14,
+    marginTop: 20,
+    borderColor: "#E3E3E3",
+    borderBottomWidth: 1.5,
   },
 
   newUser: {
     fontSize: 14,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#000000",
-    paddingTop: 35,
+    color: "#4507A1",
   },
 
   newUserButton: {
+    width: 130,
+    height: 40,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: 320,
-    height: 40,
-    marginTop: 15,
-    borderRadius: 9,
-    borderWidth: 2,
     borderColor: "#4507A1",
-    backgroundColor: "#FFF",
+    borderWidth: 2,
+    borderRadius: 9,
   },
 
-  textNewUser: {
-    textAlign: "center",
-    fontWeight: "bold",
+  newUserButtonText: {
     fontSize: 14,
+    fontWeight: "bold",
     color: "#4507A1",
   },
 });
