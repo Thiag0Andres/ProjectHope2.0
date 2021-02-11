@@ -1,29 +1,30 @@
 import React from "react";
 
 import {
+  StyleSheet,
   Image,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   Text,
   View,
-  AsyncStorage,
   KeyboardAvoidingView,
+  AsyncStorage,
   Alert,
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styles";
 
-const ForgotPassword = () => {
+const ChangePassword = () => {
   const navigation = useNavigation();
 
   const handleNavigateToLogin = () => {
     navigation.navigate("LoginScreen");
   };
 
-  const handleNavigateToChangePassword = () => {
-    navigation.navigate("ChangePassword");
+  const handleNavigateToCreateAccount = () => {
+    navigation.navigate("SingupScreen");
   };
 
   return (
@@ -40,20 +41,26 @@ const ForgotPassword = () => {
 
       <Image style={styles.logo} source={require("../../icons/logo3.png")} />
 
-      <TextInput
-        placeholder="Digite seu email para envio do código"
-        placeholderTextColor="#4507A1"
-        style={styles.placeholder}
-      ></TextInput>
+      <View>
+        <TextInput
+          placeholder="Digite o código recebido"
+          placeholderTextColor="#4507A1"
+          style={styles.placeholder}
+        ></TextInput>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleNavigateToChangePassword}
-      >
-        <Text style={styles.buttonText}>ENVIAR CÓDIGO</Text>
+        <TextInput
+          placeholder="Digite sua nova senha"
+          secureTextEntry={true}
+          placeholderTextColor="#4507A1"
+          style={styles.placeholder}
+        ></TextInput>
+      </View>
+
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>REDEFINIR SENHA</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default ForgotPassword;
+export default ChangePassword;
