@@ -12,7 +12,9 @@ const LoginScreen = () => {
     navigation.navigate("SingupScreen");
   };
 
-  const handleNavigateToForgotPassword = () => {};
+  const handleNavigateToForgotPassword = () => {
+    navigation.navigate("ForgotPassword");
+  };
 
   return (
     <View style={styles.container}>
@@ -37,7 +39,7 @@ const LoginScreen = () => {
         <TouchableOpacity onPress={() => {}} style={styles.loginButton}>
           <Text style={styles.textLoginButton}>ENTRAR</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={handleNavigateToForgotPassword}>
           <Text style={styles.textForgotPassword}>ESQUECI MINHA SENHA</Text>
         </TouchableOpacity>
       </View>
