@@ -23,13 +23,12 @@ export const styles = StyleSheet.create({
     position: "absolute",
     top: 50,
     left: 20,
-    width: 40,
-    height: 40,
   },
 
   backArrow: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
+    resizeMode: "contain",
   },
 
   errorText: {
@@ -42,7 +41,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     padding: 8,
     fontSize: 14,
-    borderColor: "#E3E3E3",
+    borderColor: "#A6BECF",
     borderBottomWidth: 1.5,
   },
 

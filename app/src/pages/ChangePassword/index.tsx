@@ -28,12 +28,15 @@ const ChangePassword = () => {
       >
         <Image
           style={styles.backArrow}
-          source={require("../../icons/arrow.png")}
+          source={require("../../assets/icons/ic_back.png")}
         />
       </BorderlessButton>
 
       <View style={styles.containerLogo}>
-        <Image style={styles.logo} source={require("../../icons/logo3.png")} />
+        <Image
+          style={styles.logo}
+          source={require("../../assets/icons/logo.png")}
+        />
       </View>
 
       <View>

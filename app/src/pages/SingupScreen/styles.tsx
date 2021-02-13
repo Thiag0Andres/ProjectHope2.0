@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
     padding: 8,
     fontSize: 14,
     marginTop: 20,
-    borderColor: "#E3E3E3",
+    borderColor: "#A6BECF",
     borderBottomWidth: 1.5,
   },
 

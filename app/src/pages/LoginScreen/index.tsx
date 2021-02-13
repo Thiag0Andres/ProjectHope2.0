@@ -8,7 +8,7 @@ import {
   View,
   ScrollView,
 } from "react-native";
-import { BorderlessButton, RectButton } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styles";
@@ -24,13 +24,20 @@ const LoginScreen = () => {
     navigation.navigate("ForgotPassword");
   };
 
+  const handleNavigateToHome = () => {
+    navigation.navigate("Home");
+  };
+
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={{ padding: 25, paddingVertical: 100 }}
     >
       <View style={styles.containerLogo}>
-        <Image style={styles.logo} source={require("../../icons/logo3.png")} />
+        <Image
+          style={styles.logo}
+          source={require("../../assets/icons/logo.png")}
+        />
       </View>
 
       <TextInput
@@ -46,7 +53,7 @@ const LoginScreen = () => {
         secureTextEntry={true}
       />
 
-      <RectButton onPress={() => {}} style={styles.loginButton}>
+      <RectButton onPress={handleNavigateToHome} style={styles.loginButton}>
         <Text style={styles.textLoginButton}>ENTRAR</Text>
       </RectButton>
       <TouchableOpacity

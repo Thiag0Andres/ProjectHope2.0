@@ -20,13 +20,20 @@ const SingupScreen = () => {
     navigation.navigate("LoginScreen");
   };
 
+  const handleNavigateToQuestion = () => {
+    navigation.navigate("Question1");
+  };
+
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={{ padding: 25, paddingVertical: 100 }}
     >
       <View style={styles.containerLogo}>
-        <Image style={styles.logo} source={require("../../icons/logo3.png")} />
+        <Image
+          style={styles.logo}
+          source={require("../../assets/icons/logo.png")}
+        />
       </View>
 
       <TextInput
@@ -48,7 +55,17 @@ const SingupScreen = () => {
         style={styles.placeholder}
       ></TextInput>
 
-      <RectButton style={styles.singupButton} onPress={handleNavigateToLogin}>
+      <TextInput
+        placeholder="Confirmar senha"
+        placeholderTextColor="#4507A1"
+        secureTextEntry={true}
+        style={styles.placeholder}
+      ></TextInput>
+
+      <RectButton
+        style={styles.singupButton}
+        onPress={handleNavigateToQuestion}
+      >
         <Text style={styles.textSingupButton}>CADASTRAR</Text>
       </RectButton>
 

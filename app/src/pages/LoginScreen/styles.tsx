@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     padding: 8,
     fontSize: 14,
-    borderColor: "#E3E3E3",
+    borderColor: "#A6BECF",
     borderBottomWidth: 1.5,
   },
 
