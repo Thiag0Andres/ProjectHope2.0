@@ -18,7 +18,7 @@ class UsersController {
   async register(req: Request, res: Response) {
     try {
       let userBody = req.body;
-      const { defaultEmail, password, user_type } = userBody;
+      const { email, password, user_type } = userBody;
 
       console.log(req.body);
 
@@ -35,9 +35,7 @@ class UsersController {
           .status(HttpStatus.NOT_FOUND)
           .send({ message: "User_type not found" });
 
-      const existUser: any = await knex("users")
-        .where("defaultEmail", defaultEmail)
-        .first();
+      const existUser: any = await knex("users").where("email", email).first();
 
       if (existUser && existUser.id) {
         return res.status(HttpStatus.CONFLICT).send({
@@ -67,7 +65,7 @@ class UsersController {
 
       const token = `Bearer ${generateToken({
         id: newuser.id,
-        email: newuser.defaultEmail,
+        email: newuser.email,
       })}`;
 
       newuser.auth_token = token;
@@ -81,6 +79,49 @@ class UsersController {
       //await sendMail({ req, pass });
 
       return res.status(payload.status).send(payload);
+    } catch (error) {
+      console.log(error);
+
+      if (error.details) {
+        return res
+          .status(HttpStatus.BAD_REQUEST)
+          .send({ message: error.details[0].message });
+      }
+
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: "Something went wrong, we will get back to you shortly",
+        error: error,
+      });
+    }
+  }
+
+  async auth(req: Request, res: Response) {
+    try {
+      const { email, password } = req.body;
+
+      // Validate request's body
+      await schemas.authenticateUserSchema.body.validateAsync(req.body);
+
+      const user: any = await knex("users").where("email", email).first();
+
+      if (!user)
+        return res
+          .status(HttpStatus.NOT_FOUND)
+          .send({ message: "User not found" });
+
+      //Compare typed password with the real password stored on DB
+      if (!(await bcrypt.compare(password, user.password)))
+        return res
+          .status(HttpStatus.BAD_REQUEST)
+          .send({ message: "Wrong password" });
+
+      //Hide password from user, then it won't be sent as response
+      user.password = undefined;
+
+      return res.json({
+        user: user,
+        token: `Bearer ${generateToken({ id: user.id })}`,
+      });
     } catch (error) {
       console.log(error);
 

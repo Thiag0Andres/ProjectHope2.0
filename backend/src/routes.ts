@@ -15,5 +15,6 @@ routes.get("/", (req: Request, res: Response) => {
 
 // Authentication
 routes.post("/users/register", usersController.register);
+routes.post("/users/authenticate", usersController.auth);
 
 export default routes;

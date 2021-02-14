@@ -9,7 +9,7 @@ class Schemas {
         "string.empty": `"Name" can't be empty`,
         "any.required": `"Name" is required`,
       }),
-      defaultEmail: Joi.string().email().required().messages({
+      email: Joi.string().email().required().messages({
         "string.base": `"Email" should be a type of string`,
         "string.empty": `"Email" can't be empty`,
         "string.email": `"Email" isn't an valid email`,
@@ -46,6 +46,23 @@ class Schemas {
       age: Joi.number().messages({
         "number.base": `"Age" should be a type of number`,
         "number.empty": `"Age" can't be empty`,
+      }),
+    }),
+  };
+
+  authenticateUserSchema = {
+    body: Joi.object().keys({
+      email: Joi.string().email().required().messages({
+        "string.base": `"Email" should be a type of string`,
+        "string.empty": `"Email" can't be empty`,
+        "string.email": `"Email" isn't an valid email`,
+        "any.required": `"Email" is required`,
+      }),
+      password: Joi.string().min(6).required().messages({
+        "string.base": `"Password" should be a type of string`,
+        "string.empty": `"Password" can't be empty`,
+        "string.min": `"Password" must have at least 6 digits`,
+        "any.required": `"Password" is required`,
       }),
     }),
   };

@@ -25,7 +25,7 @@ const Question4 = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.text}>Pergunta 03 de 05</Text>
+      <Text style={styles.text}>Pergunta 04 de 05</Text>
       <Text style={styles.title}>Qual sua idade?</Text>
       <View style={styles.content_input_select}>
         <TextInput style={styles.input} keyboardType="numeric" />
