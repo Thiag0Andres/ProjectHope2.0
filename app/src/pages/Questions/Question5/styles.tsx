@@ -10,29 +10,12 @@ export const styles = StyleSheet.create({
 
   text: {
     fontSize: 14,
+    textAlign: "justify",
     flexWrap: "wrap",
   },
 
   title: {
     fontSize: 28,
-    flexWrap: "wrap",
-    fontWeight: "bold",
-    color: "#4507A1",
-  },
-
-  card: {
-    marginTop: 20,
-    padding: 20,
-    borderWidth: 2,
-    borderColor: "#4507A1",
-    borderRadius: 9,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  titleCard: {
-    marginBottom: 5,
-    fontSize: 20,
     flexWrap: "wrap",
     fontWeight: "bold",
     color: "#4507A1",
