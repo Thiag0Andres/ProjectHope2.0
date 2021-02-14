@@ -14,8 +14,14 @@ export async function up(knex: Knex) {
     table.string("time_without_drugs");
     table.integer("age");
 
-    table.string("createdAt").notNullable().defaultTo(Date.now());
-    table.string("updatedAt").notNullable().defaultTo(Date.now());
+    table
+      .timestamp("createdAt")
+      .notNullable()
+      .defaultTo(knex.raw("CURRENT_TIMESTAMP"));
+    table
+      .timestamp("updatedAt")
+      .notNullable()
+      .defaultTo(knex.raw("CURRENT_TIMESTAMP"));
   });
 }
 
