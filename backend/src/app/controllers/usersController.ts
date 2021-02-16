@@ -173,6 +173,55 @@ class UsersController {
       });
     }
   }
+
+  async update(req: Request, res: Response) {
+    try {
+      const { password } = req.body;
+      const { id } = req.params;
+
+      // Validate request's body
+      await schemas.updateUserSchema.body.validateAsync(req.body);
+
+      let user = await knex("users").where("id", id).first();
+
+      if (!user) {
+        return res
+          .status(HttpStatus.BAD_REQUEST)
+          .json({ message: "User not found." });
+      }
+
+      user = {
+        ...user,
+        ...req.body,
+      };
+
+      if (password) {
+        // Hash to encrypt password in a way that if someone ever access database, won't be able to steal password
+        const hash = await bcrypt.hash(password, 10);
+        user.password = hash;
+      }
+
+      const now = new Date();
+      user.updatedAt = now;
+
+      await knex("users").where("id", id).update(user);
+
+      return res.json(user);
+    } catch (error) {
+      console.log(error);
+
+      if (error.details) {
+        return res
+          .status(HttpStatus.BAD_REQUEST)
+          .send({ message: error.details[0].message });
+      }
+
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: "Something went wrong, we will get back to you shortly",
+        error: error,
+      });
+    }
+  }
 }
 
 export default new UsersController();

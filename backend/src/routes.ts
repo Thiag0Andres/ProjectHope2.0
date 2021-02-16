@@ -37,7 +37,7 @@ routes.use(authMiddleware);
 /// Users
 routes.get("/users/", usersController.index);
 routes.get("/users/:id", usersController.show);
-//routes.put("/users/:id", usersController.update);
-//routes.delete("/users/:id", usersController.destroy);
+routes.put("/users/update/:id", usersController.update);
+//routes.delete("/users/delete/:id", usersController.destroy);
 
 export default routes;
