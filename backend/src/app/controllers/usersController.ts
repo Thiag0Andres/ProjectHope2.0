@@ -222,6 +222,32 @@ class UsersController {
       });
     }
   }
+
+  async destroy(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+
+      const user = await knex("users").where("id", id).first();
+
+      if (!user) {
+        return res
+          .status(HttpStatus.NOT_FOUND)
+          .json({ error: "User not found" });
+      }
+
+      await knex("users").where("id", id).delete();
+
+      return res.json({
+        usersDeleted: user,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: "Something went wrong, we will get back to you shortly",
+        error: error,
+      });
+    }
+  }
 }
 
 export default new UsersController();
