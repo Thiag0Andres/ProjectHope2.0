@@ -137,6 +137,42 @@ class UsersController {
       });
     }
   }
+
+  async index(req: Request, res: Response) {
+    try {
+      let users = await knex("users");
+
+      return res.json(users);
+    } catch (error) {
+      console.log(error);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: "Something went wrong, we will get back to you shortly",
+        error: error,
+      });
+    }
+  }
+
+  async show(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+
+      const user = await knex("users").where("id", id).first();
+
+      if (!user) {
+        return res
+          .status(HttpStatus.BAD_REQUEST)
+          .json({ message: "User not found." });
+      }
+
+      return res.json(user);
+    } catch (error) {
+      console.log(error);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: "Something went wrong, we will get back to you shortly",
+        error: error,
+      });
+    }
+  }
 }
 
 export default new UsersController();
