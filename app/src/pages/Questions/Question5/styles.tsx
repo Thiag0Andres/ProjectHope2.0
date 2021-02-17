@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     padding: 20,
-    paddingVertical: 60,
   },
 
   text: {
@@ -21,8 +20,15 @@ export const styles = StyleSheet.create({
     color: "#4507A1",
   },
 
+  containerBottom: {
+    width: "100%",
+    backgroundColor: "#fff",
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+
   Button: {
-    marginTop: 30,
+    marginTop: 10,
     height: 50,
     display: "flex",
     alignItems: "center",
@@ -38,6 +44,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 9,
+    marginBottom: 10,
   },
 
   textButton: {

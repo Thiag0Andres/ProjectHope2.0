@@ -20,7 +20,7 @@ const ChangePassword = () => {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{ padding: 25, paddingVertical: 100 }}
+      contentContainerStyle={{ padding: 25, paddingTop: 60 }}
     >
       <BorderlessButton
         style={styles.buttonArrow}

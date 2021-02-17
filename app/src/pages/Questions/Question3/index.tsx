@@ -17,19 +17,22 @@ const Question3 = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.text}>Pergunta 03 de 05</Text>
-      <Text style={styles.title}>Qual sua idade?</Text>
+    <>
+      <ScrollView style={styles.container}>
+        <Text style={styles.text}>Pergunta 03 de 05</Text>
+        <Text style={styles.title}>Qual sua idade?</Text>
 
-      <TextInput style={styles.input} keyboardType="numeric" />
-
-      <RectButton onPress={handleNavigateToQuestion4} style={styles.Button}>
-        <Text style={styles.textButton}>PRÓXIMA PERGUNTA</Text>
-      </RectButton>
-      <RectButton onPress={handleNavigateToHome} style={styles.Button2}>
-        <Text style={styles.textButton}>RESPONDER MAIS TARDE</Text>
-      </RectButton>
-    </ScrollView>
+        <TextInput style={styles.input} keyboardType="numeric" />
+      </ScrollView>
+      <View style={styles.containerBottom}>
+        <RectButton onPress={handleNavigateToQuestion4} style={styles.Button}>
+          <Text style={styles.textButton}>PRÓXIMA PERGUNTA</Text>
+        </RectButton>
+        <RectButton onPress={handleNavigateToHome} style={styles.Button2}>
+          <Text style={styles.textButton}>RESPONDER MAIS TARDE</Text>
+        </RectButton>
+      </View>
+    </>
   );
 };
 

@@ -98,6 +98,7 @@ class UsersController {
   async auth(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
+      //console.log("oi");
 
       // Validate request's body
       await schemas.authenticateUserSchema.body.validateAsync(req.body);

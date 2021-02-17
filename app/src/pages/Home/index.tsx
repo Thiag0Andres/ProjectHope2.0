@@ -8,7 +8,6 @@ import {
   View,
   ScrollView,
 } from "react-native";
-import { BorderlessButton, RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styles";

@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
 
   buttonArrow: {
     position: "absolute",
-    top: 50,
+    top: 15,
     left: 20,
   },
 
