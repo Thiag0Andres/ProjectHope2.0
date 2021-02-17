@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   },
 
   input: {
-    marginTop: 20,
+    marginTop: 60,
     padding: 8,
     fontSize: 54,
     fontWeight: "bold",

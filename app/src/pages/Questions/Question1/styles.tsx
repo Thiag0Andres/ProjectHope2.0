@@ -7,6 +7,10 @@ export const styles = StyleSheet.create({
     padding: 20,
   },
 
+  containerText: {
+    flex: 1,
+  },
+
   text: {
     fontSize: 14,
     textAlign: "justify",
@@ -30,7 +34,7 @@ export const styles = StyleSheet.create({
   },
 
   card: {
-    marginBottom: 20,
+    marginBottom: 15,
     padding: 20,
     borderWidth: 2,
     borderColor: "#E2EAF1",

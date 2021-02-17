@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 
-import { View, ScrollView, Text, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  ScrollView,
+  Text,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styles";
+import api from "../../../services/api";
 
 interface Type {
   id: number;
@@ -19,10 +27,11 @@ const Question1 = () => {
   const navigation = useNavigation();
 
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
+  const [errorMessage, setErrorMessage] = useState();
   const [userType, setUserType] = useState<Array<any>>([
     {
       id: 1,
-      title: "Dependent",
+      title: "Dependente",
       value: "dependent",
       description: "Sofro com dependência química e busco ajuda",
       image_url: require("../../../assets/icons/illustration_addicted.png"),
@@ -30,7 +39,7 @@ const Question1 = () => {
     },
     {
       id: 2,
-      title: "Co-dependent",
+      title: "Co-dependente",
       value: "co-dependent",
       description: "Quero ajudar um familiar ou amigo dependente",
       image_url: require("../../../assets/icons/illustration_family.png"),
@@ -38,7 +47,7 @@ const Question1 = () => {
     },
     {
       id: 3,
-      title: "Ex-dependent",
+      title: "Ex-dependente",
       value: "ex-dependent",
       description: "Saí do mundo das drogas e busco ajudar outras pessoas",
       image_url: require("../../../assets/icons/illustration_former.png"),
@@ -46,7 +55,7 @@ const Question1 = () => {
     },
     {
       id: 4,
-      title: "Specialist",
+      title: "Especialista",
       value: "specialist",
       description: "Sou especialista e desejo ajudar mais pessoas",
       image_url: require("../../../assets/icons/illustration_specialist.png"),
@@ -54,16 +63,37 @@ const Question1 = () => {
     },
   ]);
 
-  const handleNavigateToQuestion2 = () => {
-    navigation.navigate("Question2");
-  };
+  const handleNavigateToQuestion2 = () => {};
 
   const handleSelectItem = (value: string) => {
     //console.log("teste", value);
     setSelectedItems([value]);
   };
 
-  console.log(selectedItems);
+  async function handleSubmit() {
+    const body = {
+      user_type: selectedItems[0],
+    };
+
+    //console.log(body);
+
+    await api
+      .put("/users/authenticate", body)
+      .then(async (response) => {
+        //console.log(response.data);
+
+        navigation.navigate("Question2");
+      })
+      .catch((error) => {
+        console.log("error:", error.response.data.message);
+        setErrorMessage(error.response.data.message);
+        Alert.alert("", errorMessage, [
+          {
+            text: "Ok",
+          },
+        ]);
+      });
+  }
 
   return (
     <>
@@ -75,6 +105,7 @@ const Question1 = () => {
 
         {userType.map((type: Type) => (
           <TouchableOpacity
+            key={type.id}
             onPress={() => handleSelectItem(type.value)}
             style={
               selectedItems.includes(type.value)
@@ -90,7 +121,8 @@ const Question1 = () => {
                   : type.image_url
               }
             />
-            <View>
+
+            <View style={styles.containerText}>
               <Text
                 style={
                   selectedItems.includes(type.value)

@@ -18,14 +18,14 @@ class UsersController {
   async register(req: Request, res: Response) {
     try {
       let userBody = req.body;
-      const { email, password, user_type } = userBody;
+      const { email, password /* user_type */ } = userBody;
 
       console.log(req.body);
 
       // Validate request's body
       await schemas.createUserSchema.body.validateAsync(req.body);
 
-      if (
+      /*       if (
         user_type !== "dependent" &&
         user_type !== "co-dependent" &&
         user_type !== "ex-dependent" &&
@@ -33,7 +33,7 @@ class UsersController {
       )
         return res
           .status(HttpStatus.NOT_FOUND)
-          .send({ message: "User_type not found" });
+          .send({ message: "User_type not found" }); */
 
       const existUser: any = await knex("users").where("email", email).first();
 
@@ -41,7 +41,7 @@ class UsersController {
         return res.status(HttpStatus.CONFLICT).send({
           message: "Already registered user",
           result: {
-            user_type: existUser.user_type,
+            //user_type: existUser.user_type,
             password_generated: !!existUser.password,
           },
           status: HttpStatus.CONFLICT,
@@ -98,23 +98,24 @@ class UsersController {
   async auth(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
-      //console.log("oi");
 
       // Validate request's body
       await schemas.authenticateUserSchema.body.validateAsync(req.body);
 
       const user: any = await knex("users").where("email", email).first();
 
-      if (!user)
+      if (!user) {
         return res
           .status(HttpStatus.NOT_FOUND)
           .send({ message: "User not found" });
+      }
 
       //Compare typed password with the real password stored on DB
-      if (!(await bcrypt.compare(password, user.password)))
+      if (!(await bcrypt.compare(password, user.password))) {
         return res
           .status(HttpStatus.BAD_REQUEST)
           .send({ message: "Wrong password" });
+      }
 
       //Hide password from user, then it won't be sent as response
       user.password = undefined;

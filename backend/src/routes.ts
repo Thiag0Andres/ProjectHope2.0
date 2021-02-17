@@ -9,7 +9,7 @@ import authMiddleware from "./app/middlewares/auth";
 
 const routes = express.Router();
 
-routes.use(function (req, res, next) {
+/* routes.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -18,7 +18,7 @@ routes.use(function (req, res, next) {
   next();
 });
 
-routes.options("*", cors());
+routes.options("*", cors()); */
 
 // Default route that contains application info
 routes.get("/", (req: Request, res: Response) => {

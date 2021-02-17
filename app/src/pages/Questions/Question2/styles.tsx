@@ -11,17 +11,26 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "justify",
     flexWrap: "wrap",
+    color: "#000",
+  },
+
+  text_hover: {
+    fontSize: 14,
+    textAlign: "justify",
+    flexWrap: "wrap",
+    color: "#fff",
   },
 
   title: {
-    fontSize: 27,
+    marginBottom: 20,
+    fontSize: 28,
     flexWrap: "wrap",
     fontWeight: "bold",
     color: "#4507A1",
   },
 
   card: {
-    marginTop: 20,
+    marginBottom: 20,
     padding: 20,
     borderWidth: 2,
     borderColor: "#E2EAF1",
@@ -30,12 +39,29 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  titleCard: {
+  card_hover: {
+    marginBottom: 20,
+    padding: 20,
+    backgroundColor: "#4507A1",
+    borderRadius: 9,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  title_card: {
     marginBottom: 5,
     fontSize: 20,
     flexWrap: "wrap",
     fontWeight: "bold",
     color: "#4507A1",
+  },
+
+  title_card_hover: {
+    marginBottom: 5,
+    fontSize: 20,
+    flexWrap: "wrap",
+    fontWeight: "bold",
+    color: "#fff",
   },
 
   containerBottom: {

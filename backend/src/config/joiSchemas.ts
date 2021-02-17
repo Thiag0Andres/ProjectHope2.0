@@ -26,10 +26,9 @@ class Schemas {
         "string.empty": `"Image url" can't be empty`,
         "string.uri": `"Image url" is not a valid url`,
       }),
-      user_type: Joi.string().required().messages({
+      user_type: Joi.string().messages({
         "string.base": `"User type" should be a type of string`,
         "string.empty": `"User type" can't be empty`,
-        "any.required": `"User type" is required`,
       }),
       relationship_drugs: Joi.string().messages({
         "string.base": `"Relationship with drugs" should be a type of string`,

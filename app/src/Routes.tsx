@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import LoginScreen from "./pages/LoginScreen";
-import SingupScreen from "./pages/SingupScreen";
+import SignupScreen from "./pages/SignupScreen";
 import ForgotPassword from "./pages/ForgotPassword";
 import ChangePassword from "./pages/ChangePassword";
 import Home from "./pages/Home";
@@ -21,7 +21,7 @@ const Routes = () => {
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
         <Screen name="LoginScreen" component={LoginScreen} />
-        <Screen name="SingupScreen" component={SingupScreen} />
+        <Screen name="SignupScreen" component={SignupScreen} />
         <Screen name="ForgotPassword" component={ForgotPassword} />
         <Screen name="ChangePassword" component={ChangePassword} />
         <Screen name="Home" component={Home} />

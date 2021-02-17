@@ -23,7 +23,6 @@ const LoginScreen = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedInUser, setLoggedInUser] = useState();
   const [errorMessage, setErrorMessage] = useState();
 
   const handleNavigateToCreateAccount = () => {
@@ -32,10 +31,6 @@ const LoginScreen = () => {
 
   const handleNavigateToForgotPassword = () => {
     navigation.navigate("ForgotPassword");
-  };
-
-  const handleNavigateToHome = () => {
-    navigation.navigate("Home");
   };
 
   async function handleSubmit() {
@@ -48,53 +43,37 @@ const LoginScreen = () => {
 
     await api
       .post("/users/authenticate", body)
-      .then((response) => {
-        console.log(response.data);
-        navigation.navigate("Home");
+      .then(async (response) => {
+        //console.log(response.data);
+
+        const { user, token } = response.data;
+
+        //Utiliza o AsyncStorage para guardar o token e o user
+        await AsyncStorage.multiSet([
+          ["@CodeApi:token", token],
+          ["@CodeApi:users", JSON.stringify(user)],
+        ]);
+
+        Keyboard.dismiss();
+
+        Alert.alert("", "Login efetuado com sucesso!", [
+          {
+            text: "Ok",
+            //Mudança de página ao apertar o Alert
+            onPress: () => navigation.navigate("Home"),
+          },
+        ]);
       })
       .catch((error) => {
-        console.log("error:", error);
+        console.log("error:", error.response.data.message);
+        setErrorMessage(error.response.data.message);
+        Alert.alert("", errorMessage, [
+          {
+            text: "Ok",
+          },
+        ]);
       });
   }
-
-  /* 
-  //Função de Login com os parametros necessários
-  const signIn = async (email: string, password: string) => {
-    console.log(email, password);
-    try {
-      //Consome a api
-      const response = await api.post("/users/authenticate", {
-        email: email,
-        password: password,
-      });
-
-      //const { user, token } = response.data;
-
-      console.log(response.data);
-      
-      //Utiliza o AsyncStorage para guardar o token e o user
-      await AsyncStorage.multiSet([
-        ["@CodeApi:token", token],
-        ["@CodeApi:users", JSON.stringify(user)],
-      ]);
-
-      //seta os estado do usuário para logado
-      //setLoggedInUser(user);
-
-      Keyboard.dismiss();
-
-       
-      Alert.alert("", "Login efetuado com sucesso!", [
-        {
-          text: "Ok",
-          //Mudança de página ao apertar o Alert
-          onPress: () => navigation.navigate("Home"),
-        },
-      ]);
-    } catch (response) {
-      setErrorMessage(response.data);
-    }
-  }; */
 
   return (
     <ScrollView

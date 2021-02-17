@@ -7,8 +7,12 @@ const app = express();
 
 app.use(express.json());
 app.use(routes);
-app.use(
-  cors({
+app.use(cors());
+app.use(errors());
+
+app.listen(3333);
+
+/* {
     origin: "*",
     credentials: true,
     methods: "OPTIONS, GET, HEAD, PUT, PATCH, POST, DELETE",
@@ -23,8 +27,4 @@ app.use(
       "Cache-Control",
       "Authorization",
     ],
-  })
-);
-app.use(errors());
-
-app.listen(3333);
+  } */
