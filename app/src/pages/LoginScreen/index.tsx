@@ -23,10 +23,9 @@ const LoginScreen = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState();
 
   const handleNavigateToCreateAccount = () => {
-    navigation.navigate("SingupScreen");
+    navigation.navigate("SignupScreen");
   };
 
   const handleNavigateToForgotPassword = () => {
@@ -66,8 +65,7 @@ const LoginScreen = () => {
       })
       .catch((error) => {
         console.log("error:", error.response.data.message);
-        setErrorMessage(error.response.data.message);
-        Alert.alert("", errorMessage, [
+        Alert.alert("", error.response.data.message, [
           {
             text: "Ok",
           },

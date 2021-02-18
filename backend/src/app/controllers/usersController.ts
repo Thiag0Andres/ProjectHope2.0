@@ -20,7 +20,7 @@ class UsersController {
       let userBody = req.body;
       const { email, password /* user_type */ } = userBody;
 
-      console.log(req.body);
+      //console.log(req.body);
 
       // Validate request's body
       await schemas.createUserSchema.body.validateAsync(req.body);

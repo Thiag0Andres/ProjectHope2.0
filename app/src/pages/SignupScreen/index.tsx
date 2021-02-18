@@ -25,7 +25,6 @@ const SignupScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState();
 
   const handleNavigateToLogin = () => {
     navigation.navigate("LoginScreen");
@@ -50,12 +49,15 @@ const SignupScreen = () => {
         .then(async (response) => {
           //console.log(response.data);
 
-          const { user, token } = response.data;
+          const { result } = response.data;
+          const { auth_token } = result;
+
+          //console.log(result, auth_token);
 
           //Utiliza o AsyncStorage para guardar o token e o user
           await AsyncStorage.multiSet([
-            ["@CodeApi:token", token],
-            ["@CodeApi:users", JSON.stringify(user)],
+            ["@CodeApi:token", auth_token],
+            ["@CodeApi:users", JSON.stringify(result)],
           ]);
 
           Keyboard.dismiss();
@@ -70,8 +72,7 @@ const SignupScreen = () => {
         })
         .catch((error) => {
           console.log("error:", error.response.data.message);
-          setErrorMessage(error.response.data.message);
-          Alert.alert("", errorMessage, [
+          Alert.alert("", error.response.data.message, [
             {
               text: "Ok",
             },
