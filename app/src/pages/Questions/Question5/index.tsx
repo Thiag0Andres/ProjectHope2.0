@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Image,
@@ -9,6 +9,7 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
@@ -23,9 +24,14 @@ interface Type {
   image_url_hover: any;
 }
 
+interface User {
+  id: number;
+}
+
 const Question5 = () => {
   const navigation = useNavigation();
 
+  const [user, setUser] = useState<User>();
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
   const [familyRelationship, setFamilyRelationship] = useState<Array<any>>([
     {
@@ -63,6 +69,19 @@ const Question5 = () => {
     setSelectedItems([value]);
   };
 
+  const getUser = async () => {
+    const user: any = await AsyncStorage.getItem("@CodeApi:user");
+    const userParser = JSON.parse(user);
+
+    if (userParser) {
+      setUser(userParser);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   async function handleSubmit() {
     const body = {
       relationship_family: selectedItems[0],
@@ -71,7 +90,7 @@ const Question5 = () => {
     //console.log(body);
 
     await api
-      .put(`/users/update/${2}`, body)
+      .put(`/users/update/${user?.id}`, body)
       .then(async (response) => {
         //console.log(response.data);
 
@@ -89,7 +108,7 @@ const Question5 = () => {
 
   return (
     <>
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.text}>Pergunta 05 de 05</Text>
         <Text style={styles.title}>
           Como você descreveria a sua relação com a família?
@@ -121,7 +140,7 @@ const Question5 = () => {
             );
           }}
         />
-      </ScrollView>
+      </View>
 
       <View style={styles.containerBottom}>
         <RectButton onPress={handleSubmit} style={styles.Button}>

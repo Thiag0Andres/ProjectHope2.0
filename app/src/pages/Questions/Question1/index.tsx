@@ -7,8 +7,8 @@ import {
   Image,
   TouchableOpacity,
   Alert,
-  AsyncStorage,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
@@ -24,11 +24,15 @@ interface Type {
   image_url_hover: any;
 }
 
+interface User {
+  id: number;
+}
+
 const Question1 = () => {
   const navigation = useNavigation();
 
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
-  const [token, setToken] = useState("");
+  const [user, setUser] = useState<User>();
   const [userType, setUserType] = useState<Array<any>>([
     {
       id: 1,
@@ -69,21 +73,17 @@ const Question1 = () => {
     setSelectedItems([value]);
   };
 
-  const getToken = async () => {
-    const token = await AsyncStorage.getItem("@CodeApi:token");
-    const arr: any = token?.split(" ");
+  const getUser = async () => {
+    const user: any = await AsyncStorage.getItem("@CodeApi:user");
+    const userParser = JSON.parse(user);
 
-    setToken(String(arr[1]));
-  };
-
-  const getUSer = async () => {
-    const user = await AsyncStorage.getItem("@CodeApi:users");
-    console.log(user);
+    if (userParser) {
+      setUser(userParser);
+    }
   };
 
   useEffect(() => {
-    getToken();
-    getUSer();
+    getUser();
   }, []);
 
   async function handleSubmit() {
@@ -94,7 +94,7 @@ const Question1 = () => {
     //console.log(body);
 
     await api
-      .put(`/users/update/${2}`, body)
+      .put(`/users/update/${user?.id}`, body)
       .then(async (response) => {
         //console.log(response.data);
 

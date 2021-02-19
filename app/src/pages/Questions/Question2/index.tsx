@@ -1,15 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import {
-  Image,
-  TextInput,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-  Alert,
-} from "react-native";
-import { BorderlessButton, RectButton } from "react-native-gesture-handler";
+import { Text, TouchableOpacity, View, ScrollView, Alert } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./styles";
@@ -22,9 +15,14 @@ interface Type {
   description: string;
 }
 
+interface User {
+  id: number;
+}
+
 const Question2 = () => {
   const navigation = useNavigation();
 
+  const [user, setUser] = useState<User>();
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
   const [userDescription, setUserDescription] = useState<Array<any>>([
     {
@@ -58,6 +56,19 @@ const Question2 = () => {
     setSelectedItems([value]);
   };
 
+  const getUser = async () => {
+    const user: any = await AsyncStorage.getItem("@CodeApi:user");
+    const userParser = JSON.parse(user);
+
+    if (userParser) {
+      setUser(userParser);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   async function handleSubmit() {
     const body = {
       relationship_drugs: selectedItems[0],
@@ -66,7 +77,7 @@ const Question2 = () => {
     //console.log(body);
 
     await api
-      .put(`/users/update/${2}`, body)
+      .put(`/users/update/${user?.id}`, body)
       .then(async (response) => {
         //console.log(response.data);
 

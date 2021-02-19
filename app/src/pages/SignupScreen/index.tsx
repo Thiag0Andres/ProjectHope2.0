@@ -8,9 +8,9 @@ import {
   View,
   ScrollView,
   Alert,
-  AsyncStorage,
   Keyboard,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
@@ -57,7 +57,7 @@ const SignupScreen = () => {
           //Utiliza o AsyncStorage para guardar o token e o user
           await AsyncStorage.multiSet([
             ["@CodeApi:token", auth_token],
-            ["@CodeApi:users", JSON.stringify(result)],
+            ["@CodeApi:user", JSON.stringify(result)],
           ]);
 
           Keyboard.dismiss();

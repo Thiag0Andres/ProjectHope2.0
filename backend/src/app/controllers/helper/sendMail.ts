@@ -4,7 +4,6 @@ const mailer = require("../../../services/mailer");
  * SendMail helper
  */
 async function sendMail({ req, token }: any) {
-  console.log(token);
   let args = {
     to: req.body.email,
     from: "thiagoapalacios@gmail.com",

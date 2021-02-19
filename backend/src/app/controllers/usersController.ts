@@ -145,7 +145,7 @@ class UsersController {
   async forgotPassword(req: Request, res: Response) {
     try {
       const { email } = req.body;
-      console.log(req.body);
+      //console.log(req.body);
 
       // Validate request's body
       await schemas.forgotPasswordUserSchema.body.validateAsync(req.body);

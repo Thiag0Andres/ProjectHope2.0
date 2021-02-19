@@ -1,15 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import {
-  Image,
-  TextInput,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-  AsyncStorage,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { Image, Text, TouchableOpacity, View, ScrollView } from "react-native";
 
 import { styles } from "./styles";
 
@@ -17,36 +8,6 @@ import Header from "../../components/Header";
 import TabBar from "../../components/TabBar";
 
 const Home = () => {
-  const navigation = useNavigation();
-  const [token, setToken] = useState("");
-  const [user, setUser] = useState();
-
-  const handleNavigateToCreateAccount = () => {
-    navigation.navigate("SingupScreen");
-  };
-
-  const handleNavigateToForgotPassword = () => {
-    navigation.navigate("ForgotPassword");
-  };
-
-  const getToken = async () => {
-    const token = await AsyncStorage.getItem("@CodeApi:token");
-    setToken(String(token));
-  };
-
-  const getUSer = async () => {
-    const user = await AsyncStorage.getItem("@CodeApi:users");
-    console.log("user", user);
-  };
-
-  useEffect(() => {
-    getToken();
-    getUSer();
-  }, []);
-
-  //console.log("token", token);
-  //console.log("token", token);
-
   return (
     <>
       <Header />

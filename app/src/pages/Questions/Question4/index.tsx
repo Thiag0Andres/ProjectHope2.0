@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import {
-  Image,
-  TextInput,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-  Alert,
-  Picker,
-} from "react-native";
-import { BorderlessButton, RectButton } from "react-native-gesture-handler";
+import { TextInput, Text, View, ScrollView, Alert, Picker } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
-import { styles } from "./styles";
 import api from "../../../services/api";
+
+import { styles } from "./styles";
+
+interface User {
+  id: number;
+}
 
 const Question4 = () => {
   const navigation = useNavigation();
 
+  const [user, setUser] = useState<User>();
   const [timeWithoutDrugs, setTimeWithoutDrugs] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -26,19 +24,30 @@ const Question4 = () => {
     navigation.navigate("Home");
   };
 
+  const getUser = async () => {
+    const user: any = await AsyncStorage.getItem("@CodeApi:user");
+    const userParser = JSON.parse(user);
+
+    if (userParser) {
+      setUser(userParser);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   async function handleSubmit() {
-    const time_without_drugs: string =
-      setTimeWithoutDrugs + " " + selectedValue;
     const body = {
-      time_without_drugs: time_without_drugs,
+      time_without_drugs: String(timeWithoutDrugs + " " + selectedValue),
     };
 
     //console.log(body);
 
     await api
-      .put(`/users/update/${2}`, body)
+      .put(`/users/update/${user?.id}`, body)
       .then(async (response) => {
-        console.log(response.data);
+        //console.log(response.data);
 
         navigation.navigate("Question5");
       })

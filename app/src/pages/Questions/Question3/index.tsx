@@ -1,23 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { TextInput, Text, View, ScrollView, Alert } from "react-native";
-import { BorderlessButton, RectButton } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-community/async-storage";
+import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import api from "../../../services/api";
 
 import { styles } from "./styles";
 
+interface User {
+  id: number;
+}
+
 const Question3 = () => {
   const navigation = useNavigation();
+
+  const [user, setUser] = useState<User>();
   const [age, setAge] = useState("");
 
   const handleNavigateToHome = () => {
     navigation.navigate("Home");
   };
-  const handleNavigateToQuestion4 = () => {
-    navigation.navigate("Question4");
+  const getUser = async () => {
+    const user: any = await AsyncStorage.getItem("@CodeApi:user");
+    const userParser = JSON.parse(user);
+
+    if (userParser) {
+      setUser(userParser);
+    }
   };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   async function handleSubmit() {
     const body = {
@@ -27,7 +43,7 @@ const Question3 = () => {
     //console.log(body);
 
     await api
-      .put(`/users/update/${2}`, body)
+      .put(`/users/update/${user?.id}`, body)
       .then(async (response) => {
         //console.log(response.data);
 
