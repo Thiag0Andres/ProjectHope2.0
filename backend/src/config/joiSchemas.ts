@@ -66,6 +66,39 @@ class Schemas {
     }),
   };
 
+  forgotPasswordUserSchema = {
+    body: Joi.object().keys({
+      email: Joi.string().email().required().messages({
+        "string.base": `"Email" should be a type of string`,
+        "string.empty": `"Email" can't be empty`,
+        "string.email": `"Email" isn't an valid email`,
+        "any.required": `"Email" is required`,
+      }),
+    }),
+  };
+
+  resetPasswordUserSchema = {
+    body: Joi.object().keys({
+      email: Joi.string().email().required().messages({
+        "string.base": `"Email" should be a type of string`,
+        "string.empty": `"Email" can't be empty`,
+        "string.email": `"Email" isn't an valid email`,
+        "any.required": `"Email" is required`,
+      }),
+      token: Joi.string().required().messages({
+        "string.base": `"Token" should be a type of string`,
+        "string.empty": `"Token" can't be empty`,
+        "any.required": `"Token" is required`,
+      }),
+      password: Joi.string().min(6).required().messages({
+        "string.base": `"Password" should be a type of string`,
+        "string.empty": `"Password" can't be empty`,
+        "string.min": `"Password" must have at least 6 digits`,
+        "any.required": `"Password" is required`,
+      }),
+    }),
+  };
+
   updateUserSchema = {
     body: Joi.object().keys({
       id: Joi.number(),

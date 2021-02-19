@@ -32,6 +32,9 @@ routes.get("/", (req: Request, res: Response) => {
 routes.post("/users/register", usersController.register);
 routes.post("/users/authenticate", usersController.auth);
 
+routes.post("/users/forgotPassword", usersController.forgotPassword);
+routes.post("/users/resetPassword", usersController.resetPassword);
+
 //routes.use(authMiddleware);
 
 /// Users

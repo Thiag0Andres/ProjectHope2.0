@@ -7,6 +7,8 @@ import authConfig from "../../config/auth.json";
 import HttpStatus from "http-status-codes";
 import schemas from "../../config/joiSchemas";
 
+const sendMail = require("./helper/sendMail");
+
 //Get user ID and make a unique token based on a Secret key hide in /config
 function generateToken(params = {}) {
   return jwt.sign(params, authConfig.secret, {
@@ -123,6 +125,115 @@ class UsersController {
       return res.json({
         user: user,
         token: `Bearer ${generateToken({ id: user.id })}`,
+      });
+    } catch (error) {
+      console.log(error);
+
+      if (error.details) {
+        return res
+          .status(HttpStatus.BAD_REQUEST)
+          .send({ message: error.details[0].message });
+      }
+
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: "Something went wrong, we will get back to you shortly",
+        error: error,
+      });
+    }
+  }
+
+  async forgotPassword(req: Request, res: Response) {
+    try {
+      const { email } = req.body;
+      console.log(req.body);
+
+      // Validate request's body
+      await schemas.forgotPasswordUserSchema.body.validateAsync(req.body);
+
+      const user: any = await knex("users").where("email", email).first();
+
+      if (!user) {
+        return res
+          .status(HttpStatus.NOT_FOUND)
+          .send({ message: "User not found" });
+      }
+
+      if (user) {
+        //const token = crypto.randomBytes(20).toString("hex");
+        let token = ("" + Math.random()).substring(2, 6);
+
+        //console.log(token);
+
+        await sendMail({ req, token });
+
+        const now = new Date();
+        now.setHours(now.getHours() + 1);
+
+        user.passwordResetToken = token;
+        user.passwordResetExpires = now;
+
+        await knex("users").where("id", user.id).update(user);
+
+        return res.status(HttpStatus.OK).send({
+          message: "Token sent!",
+          status: HttpStatus.OK,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+
+      if (error.details) {
+        return res
+          .status(HttpStatus.BAD_REQUEST)
+          .send({ message: error.details[0].message });
+      }
+
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        message: "Something went wrong, we will get back to you shortly",
+        error: error,
+      });
+    }
+  }
+
+  async resetPassword(req: Request, res: Response) {
+    try {
+      const { email, token, password } = req.body;
+
+      // Validate request's body
+      await schemas.resetPasswordUserSchema.body.validateAsync(req.body);
+
+      const user: any = await knex("users").where("email", email).first();
+
+      if (!user) {
+        return res
+          .status(HttpStatus.NOT_FOUND)
+          .send({ message: "User not found" });
+      }
+
+      if (token !== user.passwordResetToken) {
+        return res
+          .status(HttpStatus.FORBIDDEN)
+          .send({ message: "Token invalid" });
+      }
+
+      const now = new Date();
+
+      if (now > user.passwordResetExpires) {
+        return res
+          .status(HttpStatus.FORBIDDEN)
+          .send({ message: "Token expired, gerenate a new one" });
+      }
+
+      //Hash to encrypt password in a way that if someone ever access database, won't be able to steal password
+      const hash = await bcrypt.hash(password, 10);
+
+      user.password = hash;
+
+      await knex("users").where("id", user.id).update(user);
+
+      return res.status(HttpStatus.OK).send({
+        message: "Password changed!",
+        status: HttpStatus.OK,
       });
     } catch (error) {
       console.log(error);

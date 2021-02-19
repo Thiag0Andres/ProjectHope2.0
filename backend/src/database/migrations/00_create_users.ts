@@ -14,6 +14,9 @@ export async function up(knex: Knex) {
     table.string("time_without_drugs");
     table.integer("age");
 
+    table.string("passwordResetToken");
+    table.timestamp("passwordResetExpires");
+
     table
       .timestamp("createdAt")
       .notNullable()
