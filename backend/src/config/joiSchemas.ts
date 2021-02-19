@@ -4,7 +4,7 @@ class Schemas {
   // Users
   createUserSchema = {
     body: Joi.object().keys({
-      name: Joi.string().messages({
+      name: Joi.string().required().messages({
         "string.base": `"Name" should be a type of string`,
         "string.empty": `"Name" can't be empty`,
         "any.required": `"Name" is required`,
