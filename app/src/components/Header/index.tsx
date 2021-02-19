@@ -23,7 +23,7 @@ const Header = () => {
     <View style={styles.container}>
       <View style={styles.view1}>
         <Text style={styles.title}>Olá Thiago</Text>
-        <Text style={styles.text}>Segunda, 19 de fevereiro</Text>
+        <Text style={styles.text}>Sexta, 19 de fevereiro</Text>
       </View>
       <TouchableOpacity onPress={Logout} style={styles.containerImage}>
         <Image

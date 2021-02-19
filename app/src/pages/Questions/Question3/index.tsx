@@ -27,7 +27,7 @@ const Question3 = () => {
     //console.log(body);
 
     await api
-      .put(`/users/update/${3}`, body)
+      .put(`/users/update/${2}`, body)
       .then(async (response) => {
         //console.log(response.data);
 
