@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   View,
@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  AsyncStorage,
 } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
@@ -27,7 +28,7 @@ const Question1 = () => {
   const navigation = useNavigation();
 
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
-  const [errorMessage, setErrorMessage] = useState();
+  const [token, setToken] = useState("");
   const [userType, setUserType] = useState<Array<any>>([
     {
       id: 1,
@@ -63,12 +64,27 @@ const Question1 = () => {
     },
   ]);
 
-  const handleNavigateToQuestion2 = () => {};
-
   const handleSelectItem = (value: string) => {
     //console.log("teste", value);
     setSelectedItems([value]);
   };
+
+  const getToken = async () => {
+    const token = await AsyncStorage.getItem("@CodeApi:token");
+    const arr: any = token?.split(" ");
+
+    setToken(String(arr[1]));
+  };
+
+  const getUSer = async () => {
+    const user = await AsyncStorage.getItem("@CodeApi:users");
+    console.log(user);
+  };
+
+  useEffect(() => {
+    getToken();
+    getUSer();
+  }, []);
 
   async function handleSubmit() {
     const body = {
@@ -78,7 +94,7 @@ const Question1 = () => {
     //console.log(body);
 
     await api
-      .put("/users/authenticate", body)
+      .put(`/users/update/${4}`, body)
       .then(async (response) => {
         //console.log(response.data);
 
@@ -86,8 +102,7 @@ const Question1 = () => {
       })
       .catch((error) => {
         console.log("error:", error.response.data.message);
-        setErrorMessage(error.response.data.message);
-        Alert.alert("", errorMessage, [
+        Alert.alert("", error.response.data.message, [
           {
             text: "Ok",
           },
@@ -146,7 +161,7 @@ const Question1 = () => {
         ))}
       </ScrollView>
       <View style={styles.containerBottom}>
-        <RectButton onPress={handleNavigateToQuestion2} style={styles.Button}>
+        <RectButton onPress={handleSubmit} style={styles.Button}>
           <Text style={styles.textButton}>PRÓXIMA PERGUNTA</Text>
         </RectButton>
       </View>

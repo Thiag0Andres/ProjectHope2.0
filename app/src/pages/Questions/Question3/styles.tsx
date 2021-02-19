@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
 
   text: {
     fontSize: 14,
+    color: "#243336",
     textAlign: "justify",
     flexWrap: "wrap",
   },

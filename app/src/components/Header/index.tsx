@@ -2,11 +2,10 @@ import React from "react";
 
 import {
   Image,
-  TextInput,
   Text,
   TouchableOpacity,
   View,
-  ScrollView,
+  AsyncStorage,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -15,12 +14,9 @@ import { styles } from "./styles";
 const Header = () => {
   const navigation = useNavigation();
 
-  const handleNavigateToCreateAccount = () => {
-    navigation.navigate("SingupScreen");
-  };
-
-  const handleNavigateToForgotPassword = () => {
-    navigation.navigate("ForgotPassword");
+  const Logout = () => {
+    AsyncStorage.clear();
+    navigation.navigate("LoginScreen");
   };
 
   return (
@@ -29,12 +25,12 @@ const Header = () => {
         <Text style={styles.title}>Olá Thiago</Text>
         <Text style={styles.text}>Segunda, 19 de fevereiro</Text>
       </View>
-      <View style={styles.containerImage}>
+      <TouchableOpacity onPress={Logout} style={styles.containerImage}>
         <Image
           style={styles.icon}
           source={require("../../assets/icons/avatar_default.png")}
         ></Image>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

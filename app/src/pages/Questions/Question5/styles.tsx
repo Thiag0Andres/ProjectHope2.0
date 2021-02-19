@@ -9,15 +9,46 @@ export const styles = StyleSheet.create({
 
   text: {
     fontSize: 14,
+    color: "#243336",
     textAlign: "justify",
     flexWrap: "wrap",
   },
 
   title: {
+    marginBottom: 20,
     fontSize: 28,
     flexWrap: "wrap",
     fontWeight: "bold",
     color: "#4507A1",
+  },
+
+  card: {
+    flexGrow: 1,
+    flexBasis: 0,
+    margin: 10,
+    padding: 20,
+    borderWidth: 2,
+    borderColor: "#E2EAF1",
+    borderRadius: 9,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  card_hover: {
+    flexGrow: 1,
+    flexBasis: 0,
+    margin: 10,
+    padding: 20,
+    backgroundColor: "#4507A1",
+    borderRadius: 9,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  icon: {
+    width: 70,
+    height: 70,
+    resizeMode: "contain",
   },
 
   containerBottom: {

@@ -32,7 +32,7 @@ routes.get("/", (req: Request, res: Response) => {
 routes.post("/users/register", usersController.register);
 routes.post("/users/authenticate", usersController.auth);
 
-routes.use(authMiddleware);
+//routes.use(authMiddleware);
 
 /// Users
 routes.get("/users/", usersController.index);

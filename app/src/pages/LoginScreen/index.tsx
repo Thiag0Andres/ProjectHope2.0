@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Image,
@@ -32,6 +32,10 @@ const LoginScreen = () => {
     navigation.navigate("ForgotPassword");
   };
 
+  useEffect(() => {
+    AsyncStorage.clear();
+  }, []);
+
   async function handleSubmit() {
     const body = {
       email: email.trim().toLocaleLowerCase(),
@@ -54,6 +58,9 @@ const LoginScreen = () => {
         ]);
 
         Keyboard.dismiss();
+
+        setEmail("");
+        setPassword("");
 
         Alert.alert("", "Login efetuado com sucesso!", [
           {

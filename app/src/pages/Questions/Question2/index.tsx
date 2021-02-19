@@ -26,25 +26,24 @@ const Question2 = () => {
   const navigation = useNavigation();
 
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
-  const [errorMessage, setErrorMessage] = useState();
   const [userDescription, setUserDescription] = useState<Array<any>>([
     {
       id: 1,
       title: "Muito dependente",
-      value: "dependent",
+      value: "very dependent",
       description: "Não tenho mais controle algum sobre meu consumo de drogas.",
     },
     {
       id: 2,
       title: "Dependente",
-      value: "co-dependent",
+      value: "dependent",
       description:
         "Sinto que ainda tenho algum controle, mas não sei até quando conseguirei.",
     },
     {
       id: 3,
       title: "Pouco dependente",
-      value: "ex-dependent",
+      value: "little dependent",
       description:
         "Consigo levar uma vida normal a maior parte do tempo, mas tenho recaídas.",
     },
@@ -54,10 +53,6 @@ const Question2 = () => {
     navigation.navigate("Home");
   };
 
-  const handleNavigateToQuestion3 = () => {
-    navigation.navigate("Question3");
-  };
-
   const handleSelectItem = (value: string) => {
     //console.log("teste", value);
     setSelectedItems([value]);
@@ -65,13 +60,13 @@ const Question2 = () => {
 
   async function handleSubmit() {
     const body = {
-      user_type: selectedItems[0],
+      relationship_drugs: selectedItems[0],
     };
 
     //console.log(body);
 
     await api
-      .put("/users/authenticate", body)
+      .put(`/users/update/${4}`, body)
       .then(async (response) => {
         //console.log(response.data);
 
@@ -79,8 +74,7 @@ const Question2 = () => {
       })
       .catch((error) => {
         console.log("error:", error.response.data.message);
-        setErrorMessage(error.response.data.message);
-        Alert.alert("", errorMessage, [
+        Alert.alert("", error.response.data.message, [
           {
             text: "Ok",
           },
@@ -130,7 +124,7 @@ const Question2 = () => {
         ))}
       </ScrollView>
       <View style={styles.containerBottom}>
-        <RectButton onPress={handleNavigateToQuestion3} style={styles.Button}>
+        <RectButton onPress={handleSubmit} style={styles.Button}>
           <Text style={styles.textButton}>PRÓXIMA PERGUNTA</Text>
         </RectButton>
         <RectButton onPress={handleNavigateToHome} style={styles.Button2}>

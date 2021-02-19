@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
 
   text: {
     fontSize: 14,
+    color: "#243336",
     textAlign: "justify",
     flexWrap: "wrap",
   },
@@ -20,12 +21,13 @@ export const styles = StyleSheet.create({
     color: "#4507A1",
   },
   content_input_select: {
+    marginTop: 60,
     flexDirection: "row",
+    alignItems: "center",
   },
 
   input: {
-    marginTop: 20,
-    marginRight: 30,
+    marginRight: 60,
     padding: 8,
     fontSize: 54,
     fontWeight: "bold",
@@ -35,13 +37,8 @@ export const styles = StyleSheet.create({
   },
 
   select: {
-    marginTop: 20,
-    padding: 8,
-    fontSize: 54,
-    fontWeight: "bold",
-    color: "#4507A1",
-    borderColor: "#A6BECF",
-    borderBottomWidth: 1.5,
+    width: 50,
+    height: 50,
   },
 
   containerBottom: {

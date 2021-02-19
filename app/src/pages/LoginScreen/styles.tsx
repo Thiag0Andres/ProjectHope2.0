@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     padding: 8,
     fontSize: 14,
+    color: "#243336",
     borderColor: "#A6BECF",
     borderBottomWidth: 1.5,
   },
@@ -69,7 +70,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#000000",
+    color: "#243336",
     paddingTop: 35,
   },
 

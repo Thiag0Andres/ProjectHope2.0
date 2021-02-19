@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "justify",
     flexWrap: "wrap",
-    color: "#000",
+    color: "#243336",
   },
 
   text_hover: {

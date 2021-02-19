@@ -36,6 +36,7 @@ const Home = () => {
 
   const getUSer = async () => {
     const user = await AsyncStorage.getItem("@CodeApi:users");
+    console.log("user", user);
   };
 
   useEffect(() => {
