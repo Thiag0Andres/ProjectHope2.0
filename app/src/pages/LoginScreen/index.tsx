@@ -10,7 +10,7 @@ import {
   Alert,
   Keyboard,
 } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
@@ -71,6 +71,7 @@ const LoginScreen = () => {
         ]);
       })
       .catch((error) => {
+        console.log(error);
         console.log("error:", error.response.data.message);
         Alert.alert("", error.response.data.message, [
           {
