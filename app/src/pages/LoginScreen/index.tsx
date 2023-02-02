@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 
-import {
-  Image,
-  TextInput,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-  Alert,
-  Keyboard,
-} from "react-native";
+import { Alert, Keyboard } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import api from "../../services/api";
 
-import { styles } from "./styles";
+import {
+  Container,
+  ContainerLogo,
+  Logo,
+  Input,
+  ButtonLogin,
+  ButtonText,
+  ButtonForgotPassword,
+  ButtonTextForgotPassword,
+  NewUser,
+  ButtonNewUser,
+  ButtonTextNewUser,
+} from "./styles";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -82,27 +84,19 @@ const LoginScreen = () => {
   }
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={{ padding: 25, paddingTop: 60 }}
-    >
-      <View style={styles.containerLogo}>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/icons/logo.png")}
-        />
-      </View>
+    <Container contentContainerStyle={{ padding: 25, paddingTop: 60 }}>
+      <ContainerLogo>
+        <Logo source={require("../../assets/icons/logo.png")} />
+      </ContainerLogo>
 
-      <TextInput
-        style={styles.input}
+      <Input
         placeholder="E-mail"
         placeholderTextColor="#4507A1"
         value={email}
         onChangeText={(text) => setEmail(text)}
       />
 
-      <TextInput
-        style={styles.input}
+      <Input
         placeholder="Senha"
         placeholderTextColor="#4507A1"
         secureTextEntry={true}
@@ -110,24 +104,18 @@ const LoginScreen = () => {
         onChangeText={(text) => setPassword(text)}
       />
 
-      <RectButton onPress={handleSubmit} style={styles.loginButton}>
-        <Text style={styles.textLoginButton}>ENTRAR</Text>
-      </RectButton>
-      <TouchableOpacity
-        style={styles.buttonForgotPassword}
-        onPress={handleNavigateToForgotPassword}
-      >
-        <Text style={styles.textForgotPassword}>ESQUECI MINHA SENHA</Text>
-      </TouchableOpacity>
+      <ButtonLogin onPress={handleSubmit}>
+        <ButtonText>ENTRAR</ButtonText>
+      </ButtonLogin>
+      <ButtonForgotPassword onPress={handleNavigateToForgotPassword}>
+        <ButtonTextForgotPassword>ESQUECI MINHA SENHA</ButtonTextForgotPassword>
+      </ButtonForgotPassword>
 
-      <Text style={styles.newUser}>NÃO POSSUI CONTA?</Text>
-      <TouchableOpacity
-        style={styles.newUserButton}
-        onPress={handleNavigateToCreateAccount}
-      >
-        <Text style={styles.textNewUser}>CRIAR NOVA CONTA</Text>
-      </TouchableOpacity>
-    </ScrollView>
+      <NewUser>NÃO POSSUI CONTA?</NewUser>
+      <ButtonNewUser onPress={handleNavigateToCreateAccount}>
+        <ButtonTextNewUser>CRIAR NOVA CONTA</ButtonTextNewUser>
+      </ButtonNewUser>
+    </Container>
   );
 };
 

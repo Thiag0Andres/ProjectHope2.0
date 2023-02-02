@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 
-import {
-  Image,
-  TextInput,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-  Alert,
-  Keyboard,
-} from "react-native";
+import { Alert, Keyboard } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 import api from "../../services/api";
 
-import { styles } from "./styles";
+import {
+  Container,
+  ContainerLogin,
+  ContainerLogo,
+  Logo,
+  Input,
+  ButtonSingup,
+  ButtonTextSingup,
+  BackToLogin,
+  ButtonBackToLogin,
+  ButtonTextBackToLogin,
+} from "./styles";
 
 const SignupScreen = () => {
   const navigation = useNavigation();
@@ -88,66 +89,53 @@ const SignupScreen = () => {
   }
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={{ padding: 25, paddingTop: 60 }}
-    >
-      <View style={styles.containerLogo}>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/icons/logo.png")}
-        />
-      </View>
+    <Container contentContainerStyle={{ padding: 25, paddingTop: 60 }}>
+      <ContainerLogo>
+        <Logo source={require("../../assets/icons/logo.png")} />
+      </ContainerLogo>
 
-      <TextInput
+      <Input
         placeholder="Nome"
         placeholderTextColor="#4507A1"
-        style={styles.placeholder}
         value={name}
         onChangeText={(text) => setName(text)}
-      ></TextInput>
+      />
 
-      <TextInput
+      <Input
         placeholder="E-mail"
         placeholderTextColor="#4507A1"
-        style={styles.placeholder}
         value={email}
         onChangeText={(text) => setEmail(text)}
-      ></TextInput>
+      />
 
-      <TextInput
+      <Input
         placeholder="Senha"
         placeholderTextColor="#4507A1"
         secureTextEntry={true}
-        style={styles.placeholder}
         value={password}
         onChangeText={(text) => setPassword(text)}
-      ></TextInput>
+      />
 
-      <TextInput
+      <Input
         placeholder="Confirmar senha"
         placeholderTextColor="#4507A1"
         secureTextEntry={true}
-        style={styles.placeholder}
         value={confirmPassword}
         onChangeText={(text) => setConfirmPassword(text)}
-      ></TextInput>
+      />
 
-      <RectButton onPress={handleSubmit} style={styles.singupButton}>
-        <Text style={styles.textSingupButton}>CADASTRAR</Text>
-      </RectButton>
+      <ButtonSingup onPress={handleSubmit}>
+        <ButtonTextSingup>CADASTRAR</ButtonTextSingup>
+      </ButtonSingup>
 
-      <View style={styles.containerLogin}>
-        <Text style={styles.newUser}>POSSUI CADASTRADO?</Text>
+      <ContainerLogin>
+        <BackToLogin>POSSUI CADASTRADO?</BackToLogin>
 
-        <TouchableOpacity
-          style={styles.newUserButton}
-          onPress={handleNavigateToLogin}
-        >
-          <Text style={styles.newUserButtonText}>FAZER LOGIN</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+        <ButtonBackToLogin onPress={handleNavigateToLogin}>
+          <ButtonTextBackToLogin>FAZER LOGIN</ButtonTextBackToLogin>
+        </ButtonBackToLogin>
+      </ContainerLogin>
+    </Container>
   );
 };
 

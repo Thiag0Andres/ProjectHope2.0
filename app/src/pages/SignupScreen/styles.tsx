@@ -1,79 +1,80 @@
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
+import Colors from "../../theme/theme";
+const ColorTheme = Colors["Theme"];
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-  },
+export const Container = styled.ScrollView`
+  flex: 1;
+  background-color: ${ColorTheme.White};
+`;
 
-  containerLogo: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+export const ContainerLogo = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
 
-  logo: {
-    width: 320,
-    height: 180,
-  },
+export const Logo = styled.Image`
+  width: 320px;
+  height: 180px;
+`;
 
-  containerLogin: {
-    marginTop: 60,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
+export const ErrorText = styled.Text`
+  color: ${ColorTheme.Red};
+  font-size: 14px;
+  font-weight: bold;
+`;
 
-  singupButton: {
-    marginTop: 30,
-    height: 40,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 9,
-    backgroundColor: "#4507A1",
-  },
+export const Input = styled.TextInput`
+  margin-top: 20px;
+  padding: 8px;
+  font-size: 14px;
+  color: ${ColorTheme.Grey75};
+  border-color: ${ColorTheme.Grey25};
+  border-bottom-width: 1.5px;
+`;
 
-  textSingupButton: {
-    color: "#FFF",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
+export const ButtonSingup = styled.TouchableOpacity`
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${ColorTheme.Primary};
+  border-radius: 9px;
+  margin-top: 30px;
+`;
 
-  errorText: {
-    color: "#c4342d",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
+export const ButtonTextSingup = styled.Text`
+  color: ${ColorTheme.White};
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+`;
 
-  placeholder: {
-    padding: 8,
-    fontSize: 14,
-    marginTop: 20,
-    borderColor: "#A6BECF",
-    borderBottomWidth: 1.5,
-  },
+export const ContainerLogin = styled.View`
+  margin-top: 60px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+`;
 
-  newUser: {
-    fontSize: 14,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#4507A1",
-  },
+export const BackToLogin = styled.Text`
+  color: ${ColorTheme.Primary};
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+`;
 
-  newUserButton: {
-    width: 130,
-    height: 40,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: "#4507A1",
-    borderWidth: 2,
-    borderRadius: 9,
-  },
+export const ButtonBackToLogin = styled.TouchableOpacity`
+  width: 130px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-color: ${ColorTheme.Primary};
+  border-radius: 9px;
+  border-width: 2px;
+`;
 
-  newUserButtonText: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#4507A1",
-  },
-});
+export const ButtonTextBackToLogin = styled.Text`
+  color: ${ColorTheme.Primary};
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+`;

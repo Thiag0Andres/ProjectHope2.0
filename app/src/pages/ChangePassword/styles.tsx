@@ -12,7 +12,6 @@ export const Container = styled.ScrollView`
 export const Content = styled.View``;
 
 export const ContainerLogo = styled.View`
-  display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
@@ -52,7 +51,6 @@ export const Input = styled.TextInput`
 export const Button = styled.TouchableOpacity`
   height: 40px;
   margin-top: 50px;
-  display: flex;
   align-items: center;
   justify-content: center;
   background-color: ${ColorTheme.Primary};

@@ -1,95 +1,92 @@
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
+import Colors from "../../theme/theme";
+const ColorTheme = Colors["Theme"];
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
+export const Container = styled.ScrollView`
+  flex: 1;
+  background-color: ${ColorTheme.White};
+`;
 
-  containerLogo: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+export const Content = styled.View``;
 
-  logo: {
-    width: 320,
-    height: 180,
-  },
+export const ContainerLogo = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
 
-  textError: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#CC0000",
-  },
+export const Logo = styled.Image`
+  width: 320px;
+  height: 180px;
+`;
 
-  input: {
-    marginTop: 20,
-    padding: 8,
-    fontSize: 14,
-    color: "#243336",
-    borderColor: "#A6BECF",
-    borderBottomWidth: 1.5,
-  },
+export const ErrorText = styled.Text`
+  color: ${ColorTheme.Red};
+  font-size: 14px;
+  font-weight: bold;
+`;
 
-  loginButton: {
-    marginTop: 30,
-    height: 40,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20,
-    backgroundColor: "#4507A1",
-    borderRadius: 9,
-  },
+export const Input = styled.TextInput`
+  margin-top: 20px;
+  padding: 8px;
+  font-size: 14px;
+  color: ${ColorTheme.Grey75};
+  border-color: ${ColorTheme.Grey25};
+  border-bottom-width: 1.5px;
+`;
 
-  textLoginButton: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#FFF",
-  },
+export const ButtonLogin = styled.TouchableOpacity`
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${ColorTheme.Primary};
+  border-radius: 9px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+`;
 
-  buttonForgotPassword: {
-    height: 40,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20,
-  },
+export const ButtonText = styled.Text`
+  color: ${ColorTheme.White};
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+`;
 
-  textForgotPassword: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#979696",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+export const ButtonForgotPassword = styled.TouchableOpacity`
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+`;
 
-  newUser: {
-    fontSize: 14,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#243336",
-    paddingTop: 35,
-  },
+export const ButtonTextForgotPassword = styled.Text`
+  color: ${ColorTheme.Grey50};
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+`;
 
-  newUserButton: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: 40,
-    marginTop: 15,
-    borderRadius: 9,
-    borderWidth: 2,
-    borderColor: "#4507A1",
-    backgroundColor: "#FFF",
-  },
+export const NewUser = styled.Text`
+  color: ${ColorTheme.Grey75};
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 35px;
+`;
 
-  textNewUser: {
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 14,
-    color: "#4507A1",
-  },
-});
+export const ButtonNewUser = styled.TouchableOpacity`
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${ColorTheme.White};
+  border-color: ${ColorTheme.Primary};
+  border-radius: 9px;
+  border-width: 2px;
+  margin-top: 15px;
+`;
+
+export const ButtonTextNewUser = styled.Text`
+  color: ${ColorTheme.Primary};
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+`;
