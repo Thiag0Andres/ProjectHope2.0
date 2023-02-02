@@ -28,7 +28,7 @@ const ChangePassword = () => {
     navigation.navigate("ForgotPassword");
   };
 
-  async function handleSubmit() {
+  function handleSubmit() {
     const body = {
       email: email.trim().toLocaleLowerCase(),
       token: token,
@@ -37,9 +37,9 @@ const ChangePassword = () => {
 
     //console.log(body);
 
-    await api
+    api
       .post("/users/resetPassword", body)
-      .then(async (response) => {
+      .then((response) => {
         //console.log(response.data);
 
         Keyboard.dismiss();

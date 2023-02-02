@@ -1,11 +1,9 @@
 import React from "react";
-
 import { Image, Text, TouchableOpacity, View, ScrollView } from "react-native";
-
-import { styles } from "./styles";
-
 import Header from "../../components/Header";
 import TabBar from "../../components/TabBar";
+
+import { styles } from "./styles";
 
 const Home = () => {
   return (

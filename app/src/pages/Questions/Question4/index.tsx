@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import { TextInput, Text, View, ScrollView, Alert, Picker } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import { iStore } from "../../../store";
 
 import api from "../../../services/api";
-
 import { styles } from "./styles";
-
-interface User {
-  id: number;
-}
 
 const Question4 = () => {
   const navigation = useNavigation();
+  const { user } = useSelector((store: iStore) => store.user);
 
-  const [user, setUser] = useState<User>();
   const [timeWithoutDrugs, setTimeWithoutDrugs] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -24,29 +19,14 @@ const Question4 = () => {
     navigation.navigate("Home");
   };
 
-  const getUser = async () => {
-    const user: any = await AsyncStorage.getItem("@CodeApi:user");
-    const userParser = JSON.parse(user);
-
-    if (userParser) {
-      setUser(userParser);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  async function handleSubmit() {
+  function handleSubmit() {
     const body = {
       time_without_drugs: String(timeWithoutDrugs + " " + selectedValue),
     };
 
-    //console.log(body);
-
-    await api
+    api
       .put(`/users/update/${user?.id}`, body)
-      .then(async (response) => {
+      .then((response) => {
         //console.log(response.data);
 
         navigation.navigate("Question5");

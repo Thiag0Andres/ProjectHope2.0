@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
 import { Alert, Keyboard } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../store/ducks/user/actions";
 
 import api from "../../services/api";
 
@@ -20,6 +21,7 @@ import {
 } from "./styles";
 
 const SignupScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const [name, setName] = useState("");
@@ -31,7 +33,7 @@ const SignupScreen = () => {
     navigation.navigate("LoginScreen");
   };
 
-  async function handleSubmit() {
+  function handleSubmit() {
     if (
       password === confirmPassword &&
       password !== "" &&
@@ -43,30 +45,19 @@ const SignupScreen = () => {
         password: password,
       };
 
-      //console.log(body);
-
-      await api
+      api
         .post("/users/register", body)
-        .then(async (response) => {
-          //console.log(response.data);
-
+        .then((response) => {
           const { result } = response.data;
           const { auth_token } = result;
 
-          //console.log(result, auth_token);
-
-          //Utiliza o AsyncStorage para guardar o token e o user
-          await AsyncStorage.multiSet([
-            ["@CodeApi:token", auth_token],
-            ["@CodeApi:user", JSON.stringify(result)],
-          ]);
+          dispatch(updateUser({ user: { ...result, token: auth_token } }));
 
           Keyboard.dismiss();
 
           Alert.alert("", "Cadastro efetuado com sucesso!", [
             {
               text: "Ok",
-              //Mudança de página ao apertar o Alert
               onPress: () => navigation.navigate("Question1"),
             },
           ]);

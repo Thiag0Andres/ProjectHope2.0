@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import {
   View,
   ScrollView,
@@ -8,12 +7,13 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import { iStore } from "../../../store";
 
-import { styles } from "./styles";
 import api from "../../../services/api";
+import { styles } from "./styles";
 
 interface Type {
   id: number;
@@ -24,16 +24,12 @@ interface Type {
   image_url_hover: any;
 }
 
-interface User {
-  id: number;
-}
-
 const Question1 = () => {
   const navigation = useNavigation();
+  const { user } = useSelector((store: iStore) => store.user);
 
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
-  const [user, setUser] = useState<User>();
-  const [userType, setUserType] = useState<Array<any>>([
+  const [userType, setUserType] = useState<Array<Type>>([
     {
       id: 1,
       title: "Dependente",
@@ -69,32 +65,16 @@ const Question1 = () => {
   ]);
 
   const handleSelectItem = (value: string) => {
-    //console.log("teste", value);
     setSelectedItems([value]);
   };
-
-  const getUser = async () => {
-    const user: any = await AsyncStorage.getItem("@CodeApi:user");
-    const userParser = JSON.parse(user);
-
-    if (userParser) {
-      setUser(userParser);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
 
   async function handleSubmit() {
     const body = {
       user_type: selectedItems[0],
     };
 
-    //console.log(body);
-
     await api
-      .put(`/users/update/${user?.id}`, body)
+      .put(`/users/update/${user.id}`, body)
       .then(async (response) => {
         //console.log(response.data);
 
@@ -118,7 +98,7 @@ const Question1 = () => {
           Com qual destes perfis você mais se identifica?
         </Text>
 
-        {userType.map((type: Type) => (
+        {userType.map((type) => (
           <TouchableOpacity
             key={type.id}
             onPress={() => handleSelectItem(type.value)}

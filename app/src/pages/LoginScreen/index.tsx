@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import { Alert, Keyboard } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../store/ducks/user/actions";
 
 import api from "../../services/api";
 
@@ -21,6 +21,7 @@ import {
 } from "./styles";
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const [email, setEmail] = useState("");
@@ -34,30 +35,18 @@ const LoginScreen = () => {
     navigation.navigate("ForgotPassword");
   };
 
-  useEffect(() => {
-    AsyncStorage.clear();
-  }, []);
-
-  async function handleSubmit() {
+  function handleSubmit() {
     const body = {
       email: email.trim().toLocaleLowerCase(),
       password: password,
     };
 
-    //console.log(body);
-
-    await api
+    api
       .post("/users/authenticate", body)
-      .then(async (response) => {
-        //console.log(response.data);
-
+      .then((response) => {
         const { user, token } = response.data;
 
-        //Utiliza o AsyncStorage para guardar o token e o user
-        await AsyncStorage.multiSet([
-          ["@CodeApi:token", token],
-          ["@CodeApi:user", JSON.stringify(user)],
-        ]);
+        dispatch(updateUser({ user: { ...user, token: token } }));
 
         Keyboard.dismiss();
 
@@ -67,7 +56,6 @@ const LoginScreen = () => {
         Alert.alert("", "Login efetuado com sucesso!", [
           {
             text: "Ok",
-            //Mudança de página ao apertar o Alert
             onPress: () => navigation.navigate("Home"),
           },
         ]);

@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import {
   Image,
   FlatList,
   Text,
   TouchableOpacity,
   View,
-  ScrollView,
   Alert,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import { iStore } from "../../../store";
 
 import api from "../../../services/api";
-
 import { styles } from "./styles";
 
 interface Type {
@@ -24,16 +22,12 @@ interface Type {
   image_url_hover: any;
 }
 
-interface User {
-  id: number;
-}
-
 const Question5 = () => {
   const navigation = useNavigation();
+  const { user } = useSelector((store: iStore) => store.user);
 
-  const [user, setUser] = useState<User>();
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
-  const [familyRelationship, setFamilyRelationship] = useState<Array<any>>([
+  const [familyRelationship, setFamilyRelationship] = useState<Array<Type>>([
     {
       id: 1,
       value: "angry",
@@ -65,33 +59,17 @@ const Question5 = () => {
   };
 
   const handleSelectItem = (value: string) => {
-    //console.log("teste", value);
     setSelectedItems([value]);
   };
 
-  const getUser = async () => {
-    const user: any = await AsyncStorage.getItem("@CodeApi:user");
-    const userParser = JSON.parse(user);
-
-    if (userParser) {
-      setUser(userParser);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  async function handleSubmit() {
+  function handleSubmit() {
     const body = {
       relationship_family: selectedItems[0],
     };
 
-    //console.log(body);
-
-    await api
-      .put(`/users/update/${user?.id}`, body)
-      .then(async (response) => {
+    api
+      .put(`/users/update/${user.id}`, body)
+      .then((response) => {
         //console.log(response.data);
 
         navigation.navigate("Home");

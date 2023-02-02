@@ -25,16 +25,16 @@ const ForgotPassword = () => {
 
   const [email, setEmail] = useState("");
 
-  async function handleSubmit() {
+  function handleSubmit() {
     const body = {
       email: email.trim().toLocaleLowerCase(),
     };
 
     //console.log(body);
 
-    await api
+    api
       .post("/users/forgotPassword", body)
-      .then(async (response) => {
+      .then((response) => {
         //console.log(response.data);
 
         Keyboard.dismiss();

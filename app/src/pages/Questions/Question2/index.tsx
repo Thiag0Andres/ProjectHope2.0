@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
 import { Text, TouchableOpacity, View, ScrollView, Alert } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import { iStore } from "../../../store";
 
-import { styles } from "./styles";
 import api from "../../../services/api";
+import { styles } from "./styles";
 
 interface Type {
   id: number;
@@ -15,16 +15,12 @@ interface Type {
   description: string;
 }
 
-interface User {
-  id: number;
-}
-
 const Question2 = () => {
   const navigation = useNavigation();
+  const { user } = useSelector((store: iStore) => store.user);
 
-  const [user, setUser] = useState<User>();
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
-  const [userDescription, setUserDescription] = useState<Array<any>>([
+  const [userDescription, setUserDescription] = useState<Array<Type>>([
     {
       id: 1,
       title: "Muito dependente",
@@ -52,33 +48,17 @@ const Question2 = () => {
   };
 
   const handleSelectItem = (value: string) => {
-    //console.log("teste", value);
     setSelectedItems([value]);
   };
 
-  const getUser = async () => {
-    const user: any = await AsyncStorage.getItem("@CodeApi:user");
-    const userParser = JSON.parse(user);
-
-    if (userParser) {
-      setUser(userParser);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  async function handleSubmit() {
+  function handleSubmit() {
     const body = {
       relationship_drugs: selectedItems[0],
     };
 
-    //console.log(body);
-
-    await api
-      .put(`/users/update/${user?.id}`, body)
-      .then(async (response) => {
+    api
+      .put(`/users/update/${user.id}`, body)
+      .then((response) => {
         //console.log(response.data);
 
         navigation.navigate("Question3");
@@ -101,7 +81,7 @@ const Question2 = () => {
           Como você se descreveria a sua relação com a droga?
         </Text>
 
-        {userDescription.map((type: Type) => (
+        {userDescription.map((type) => (
           <TouchableOpacity
             key={type.id}
             onPress={() => handleSelectItem(type.value)}

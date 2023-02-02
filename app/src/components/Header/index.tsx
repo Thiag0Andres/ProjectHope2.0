@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { iStore } from "../../store";
+import { removeUser } from "../../store/ducks/user/actions";
 
 import {
   Container,
@@ -10,10 +12,6 @@ import {
   Title,
   Text,
 } from "./styles";
-
-interface User {
-  name: string;
-}
 
 const week = [
   "Domingo",
@@ -41,42 +39,21 @@ const month = [
 ];
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { user } = useSelector((store: iStore) => store.user);
 
   const date = new Date();
   const today = date.getDate();
   const day = date.getDay();
   const currentMonth = date.getMonth();
 
-  const [token, setToken] = useState("");
-  const [user, setUser] = useState<User>();
-
   const Logout = () => {
-    AsyncStorage.clear();
+    dispatch(removeUser());
     navigation.navigate("LoginScreen");
   };
 
-  const getToken = async () => {
-    const token = AsyncStorage.getItem("@CodeApi:token");
-
-    if (token) {
-      setToken(String(token));
-    }
-  };
-
-  const getUser = async () => {
-    const user: any = await AsyncStorage.getItem("@CodeApi:user");
-    const userParser = JSON.parse(user);
-
-    if (userParser) {
-      setUser(userParser);
-    }
-  };
-
-  useEffect(() => {
-    getToken();
-    getUser();
-  }, []);
+  console.log(user);
 
   return (
     <Container>
