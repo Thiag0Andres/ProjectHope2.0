@@ -1,17 +1,52 @@
 import React, { useEffect, useState } from "react";
-
-import { Image, Text, TouchableOpacity, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
-import { styles } from "./styles";
+import {
+  Container,
+  ContainerImage,
+  Avatar,
+  ContainerUserInfo,
+  Title,
+  Text,
+} from "./styles";
 
 interface User {
   name: string;
 }
 
+const week = [
+  "Domingo",
+  "Segunda-Feira",
+  "Terça-Feira",
+  "Quarta-Feira",
+  "Quinta-Feira",
+  "Sexta-Feira",
+  "Sábado",
+];
+
+const month = [
+  "Janeiro",
+  "Fevereiro",
+  "Março",
+  "Abril",
+  "Maio",
+  "Junho",
+  "Julho",
+  "Agosto",
+  "Setembro",
+  "Outubro",
+  "Novembro",
+  "Dezembro",
+];
+
 const Header = () => {
   const navigation = useNavigation();
+
+  const date = new Date();
+  const today = date.getDate();
+  const day = date.getDay();
+  const currentMonth = date.getMonth();
 
   const [token, setToken] = useState("");
   const [user, setUser] = useState<User>();
@@ -44,18 +79,20 @@ const Header = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.view1}>
-        {user && <Text style={styles.title}>Olá {user.name}</Text>}
-        <Text style={styles.text}>Sexta, 19 de fevereiro</Text>
-      </View>
-      <TouchableOpacity onPress={Logout} style={styles.containerImage}>
-        <Image
-          style={styles.icon}
+    <Container>
+      <ContainerUserInfo>
+        {user && <Title>Olá {user.name}</Title>}
+        <Text>
+          {week[day]}, {today} de {month[currentMonth]}
+        </Text>
+      </ContainerUserInfo>
+      <ContainerImage onPress={Logout}>
+        <Avatar
+          resizeMode="contain"
           source={require("../../assets/icons/avatar_default.png")}
-        ></Image>
-      </TouchableOpacity>
-    </View>
+        />
+      </ContainerImage>
+    </Container>
   );
 };
 

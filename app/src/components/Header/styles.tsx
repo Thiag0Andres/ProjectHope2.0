@@ -1,47 +1,42 @@
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
+import Colors from "../../theme/theme";
+const ColorTheme = Colors["Theme"];
 
-export const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    height: 80,
-    backgroundColor: "#fff",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
+export const Container = styled.View`
+  padding: 20px;
+  height: 80px
+  background-color: ${ColorTheme.White}; 
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
 
-  view1: {
-    backgroundColor: "#fff",
-  },
+export const ContainerImage = styled.TouchableOpacity`
+  border-radius: 50px;
+  border-width: 3px;
+  border-color: ${ColorTheme.Primary};
+`;
 
-  view2: {
-    backgroundColor: "#fff",
-  },
+export const Avatar = styled.Image`
+  width: 50px;
+  height: 50px;
+`;
 
-  containerImage: {
-    borderRadius: 50,
-    borderWidth: 3,
-    borderColor: "#4507A1",
-  },
+export const ContainerUserInfo = styled.View`
+  background-color: ${ColorTheme.White};
+`;
 
-  icon: {
-    width: 50,
-    height: 50,
-    resizeMode: "contain",
-  },
+export const Title = styled.Text`
+  color: ${ColorTheme.Primary};
+  font-size: 20px;
+  font-weight: bold;
+  flex-wrap: wrap;
+`;
 
-  title: {
-    fontSize: 20,
-    flexWrap: "wrap",
-    fontWeight: "bold",
-    color: "#4507A1",
-  },
-
-  text: {
-    fontSize: 14,
-    fontWeight: "900",
-    textAlign: "left",
-    flexWrap: "wrap",
-    color: "#243336",
-  },
-});
+export const Text = styled.Text`
+  color: ${ColorTheme.Grey75};
+  font-size: 14px;
+  font-weight: 900;
+  flex-wrap: wrap;
+  text-align: left;
+`;

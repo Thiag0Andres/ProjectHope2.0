@@ -1,29 +1,30 @@
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    height: 60,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+import styled from "styled-components/native";
+import Colors from "../../theme/theme";
+const ColorTheme = Colors["Theme"];
 
-  containerImages: {
-    width: "100%",
-    height: "100%",
-    borderWidth: 2,
-    borderTopColor: "#E2EAF1",
-    borderColor: "#fff",
-    backgroundColor: "#fff",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
+export const Container = styled.View`
+  padding-horizontal: 20px;
+  height: 60px;
+  background-color: ${ColorTheme.White};
+  align-items: center;
+  justify-content: center;
+`;
 
-  icon: {
-    width: 30,
-    height: 30,
-    resizeMode: "contain",
-  },
-});
+export const ContainerImages = styled.View`
+  width: 100%;
+  height: 100%;
+  border-width: 2px;
+  border-top-color: ${ColorTheme.Grey};
+  border-color: ${ColorTheme.White};
+  background-color: ${ColorTheme.White};
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+export const Icon = styled.Image`
+  width: 30px;
+  height: 30px;
+`;
