@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 
-import {
-  Image,
-  TextInput,
-  Text,
-  View,
-  ScrollView,
-  Alert,
-  Keyboard,
-} from "react-native";
-import { BorderlessButton, RectButton } from "react-native-gesture-handler";
+import { Alert, Keyboard } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import api from "../../services/api";
 
-import { styles } from "./styles";
+import {
+  Container,
+  ContainerLogo,
+  Logo,
+  ButtonArrow,
+  BackArrow,
+  Input,
+  Button,
+  ButtonText,
+} from "./styles";
 
 const ForgotPassword = () => {
   const navigation = useNavigation();
@@ -60,39 +60,29 @@ const ForgotPassword = () => {
   }
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={{ padding: 25, paddingTop: 60 }}
-    >
-      <BorderlessButton
-        style={styles.buttonArrow}
-        onPress={handleNavigateToLogin}
-      >
-        <Image
-          style={styles.backArrow}
+    <Container contentContainerStyle={{ padding: 25, paddingTop: 60 }}>
+      <ButtonArrow onPress={handleNavigateToLogin}>
+        <BackArrow
+          resizeMode="contain"
           source={require("../../assets/icons/ic_back.png")}
         />
-      </BorderlessButton>
+      </ButtonArrow>
 
-      <View style={styles.containerLogo}>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/icons/logo.png")}
-        />
-      </View>
+      <ContainerLogo>
+        <Logo source={require("../../assets/icons/logo.png")} />
+      </ContainerLogo>
 
-      <TextInput
+      <Input
         placeholder="Digite seu email para envio do código"
         placeholderTextColor="#4507A1"
-        style={styles.placeholder}
         value={email}
         onChangeText={(text) => setEmail(text)}
-      ></TextInput>
+      />
 
-      <RectButton style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>ENVIAR CÓDIGO</Text>
-      </RectButton>
-    </ScrollView>
+      <Button onPress={handleSubmit}>
+        <ButtonText>ENVIAR CÓDIGO</ButtonText>
+      </Button>
+    </Container>
   );
 };
 

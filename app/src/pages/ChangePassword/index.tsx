@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 
-import {
-  Image,
-  TextInput,
-  Text,
-  View,
-  ScrollView,
-  Keyboard,
-  Alert,
-} from "react-native";
-import { BorderlessButton, RectButton } from "react-native-gesture-handler";
+import { Keyboard, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import api from "../../services/api";
 
-import { styles } from "./styles";
+import {
+  Container,
+  Content,
+  ContainerLogo,
+  Logo,
+  ButtonArrow,
+  BackArrow,
+  Input,
+  Button,
+  ButtonText,
+} from "./styles";
 
 const ChangePassword = () => {
   const navigation = useNavigation();
@@ -66,58 +67,45 @@ const ChangePassword = () => {
   }
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={{ padding: 25, paddingTop: 60 }}
-    >
-      <BorderlessButton
-        style={styles.buttonArrow}
-        onPress={handleNavigateToForgotPassword}
-      >
-        <Image
-          style={styles.backArrow}
+    <Container contentContainerStyle={{ padding: 25, paddingTop: 60 }}>
+      <ButtonArrow onPress={handleNavigateToForgotPassword}>
+        <BackArrow
+          resizeMode="contain"
           source={require("../../assets/icons/ic_back.png")}
         />
-      </BorderlessButton>
+      </ButtonArrow>
 
-      <View style={styles.containerLogo}>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/icons/logo.png")}
-        />
-      </View>
+      <ContainerLogo>
+        <Logo source={require("../../assets/icons/logo.png")} />
+      </ContainerLogo>
 
-      <View>
-        <TextInput
+      <Content>
+        <Input
           placeholder="Digite o seu email"
           placeholderTextColor="#4507A1"
-          style={styles.placeholder}
           value={email}
           onChangeText={(text) => setEmail(text)}
-        ></TextInput>
+        />
 
-        <TextInput
+        <Input
           placeholder="Digite o código recebido"
           placeholderTextColor="#4507A1"
-          style={styles.placeholder}
           value={token}
           onChangeText={(text) => setToken(text)}
-        ></TextInput>
-
-        <TextInput
+        />
+        <Input
           placeholder="Digite sua nova senha"
           secureTextEntry={true}
           placeholderTextColor="#4507A1"
-          style={styles.placeholder}
           value={password}
           onChangeText={(text) => setPassword(text)}
-        ></TextInput>
-      </View>
+        />
+      </Content>
 
-      <RectButton onPress={handleSubmit} style={styles.button}>
-        <Text style={styles.buttonText}>REDEFINIR SENHA</Text>
-      </RectButton>
-    </ScrollView>
+      <Button onPress={handleSubmit}>
+        <ButtonText>REDEFINIR SENHA</ButtonText>
+      </Button>
+    </Container>
   );
 };
 

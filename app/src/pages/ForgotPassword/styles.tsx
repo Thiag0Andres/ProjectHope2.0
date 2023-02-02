@@ -1,66 +1,64 @@
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
+import { BorderlessButton } from "react-native-gesture-handler";
+import Colors from "../../theme/theme";
+const ColorTheme = Colors["Theme"];
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-    position: "relative",
-  },
+export const Container = styled.ScrollView`
+  flex: 1;
+  background-color: ${ColorTheme.White};
+  position: relative;
+`;
 
-  containerLogo: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 30,
-  },
+export const ContainerLogo = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+`;
 
-  logo: {
-    width: 320,
-    height: 180,
-  },
+export const Logo = styled.Image`
+  width: 320px;
+  height: 180px;
+`;
 
-  buttonArrow: {
-    position: "absolute",
-    top: 15,
-    left: 20,
-    width: 40,
-    height: 40,
-  },
+export const ButtonArrow = styled(BorderlessButton)`
+  position: absolute;
+  top: 15px;
+  left: 20px;
+`;
 
-  backArrow: {
-    width: 30,
-    height: 30,
-    resizeMode: "contain",
-  },
+export const BackArrow = styled.Image`
+  width: 30px;
+  height: 30px;
+`;
 
-  errorText: {
-    color: "#c4342d",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
+export const ErrorText = styled.Text`
+  color: ${ColorTheme.Red};
+  font-size: 14px;
+  font-weight: bold;
+`;
 
-  placeholder: {
-    marginTop: 20,
-    padding: 8,
-    fontSize: 14,
-    color: "#243336",
-    borderColor: "#A6BECF",
-    borderBottomWidth: 1.5,
-  },
+export const Input = styled.TextInput`
+  margin-top: 20px;
+  padding: 8px;
+  font-size: 14px;
+  color: ${ColorTheme.Grey75};
+  border-color: ${ColorTheme.Grey25};
+  border-bottom-width: 1.5px;
+`;
 
-  button: {
-    height: 40,
-    marginTop: 50,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#4507A1",
-    borderRadius: 9,
-  },
+export const Button = styled.TouchableOpacity`
+  height: 40px;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${ColorTheme.Primary};
+  border-radius: 9px;
+`;
 
-  buttonText: {
-    color: "#FFF",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-});
+export const ButtonText = styled.Text`
+  color: ${ColorTheme.White};
+  font-size: 14px;
+  font-weight: bold;
+`;
