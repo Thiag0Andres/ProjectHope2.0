@@ -24,22 +24,16 @@ const Routes = () => {
   return (
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
-        {user.token ? (
-          <Screen name="Home" component={Home} />
-        ) : (
-          <>
-            <Screen name="LoginScreen" component={LoginScreen} />
-            <Screen name="SignupScreen" component={SignupScreen} />
-            <Screen name="ForgotPassword" component={ForgotPassword} />
-            <Screen name="ChangePassword" component={ChangePassword} />
-
-            <Screen name="Question1" component={Question1} />
-            <Screen name="Question2" component={Question2} />
-            <Screen name="Question3" component={Question3} />
-            <Screen name="Question4" component={Question4} />
-            <Screen name="Question5" component={Question5} />
-          </>
-        )}
+        <Screen name="LoginScreen" component={LoginScreen} />
+        <Screen name="ForgotPassword" component={ForgotPassword} />
+        <Screen name="ChangePassword" component={ChangePassword} />
+        <Screen name="SignupScreen" component={SignupScreen} />
+        <Screen name="Question1" component={Question1} />
+        <Screen name="Question2" component={Question2} />
+        <Screen name="Question3" component={Question3} />
+        <Screen name="Question4" component={Question4} />
+        <Screen name="Question5" component={Question5} />
+        <Screen name="Home" component={Home} />
       </Navigator>
     </NavigationContainer>
   );

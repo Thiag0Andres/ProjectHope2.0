@@ -1,68 +1,29 @@
 import React, { useState } from "react";
-import {
-  View,
-  ScrollView,
-  Text,
-  Image,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { iStore } from "../../../store";
+import { data } from "./data";
 
 import api from "../../../services/api";
-import { styles } from "./styles";
-
-interface Type {
-  id: number;
-  title: string;
-  value: string;
-  description: string;
-  image_url: any;
-  image_url_hover: any;
-}
+import {
+  Container,
+  ContainerBottom,
+  ContainerText,
+  Card,
+  Icon,
+  Text,
+  Title,
+  TitleCard,
+  Button,
+  ButtonText,
+} from "./styles";
 
 const Question1 = () => {
   const navigation = useNavigation();
   const { user } = useSelector((store: iStore) => store.user);
 
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
-  const [userType, setUserType] = useState<Array<Type>>([
-    {
-      id: 1,
-      title: "Dependente",
-      value: "dependent",
-      description: "Sofro com dependência química e busco ajuda",
-      image_url: require("../../../assets/icons/illustration_addicted.png"),
-      image_url_hover: require("../../../assets/icons/illustration_addicted_selected.png"),
-    },
-    {
-      id: 2,
-      title: "Co-dependente",
-      value: "co-dependent",
-      description: "Quero ajudar um familiar ou amigo dependente",
-      image_url: require("../../../assets/icons/illustration_family.png"),
-      image_url_hover: require("../../../assets/icons/illustration_family_selected.png"),
-    },
-    {
-      id: 3,
-      title: "Ex-dependente",
-      value: "ex-dependent",
-      description: "Saí do mundo das drogas e busco ajudar outras pessoas",
-      image_url: require("../../../assets/icons/illustration_former.png"),
-      image_url_hover: require("../../../assets/icons/illustration_former_selected.png"),
-    },
-    {
-      id: 4,
-      title: "Especialista",
-      value: "specialist",
-      description: "Sou especialista e desejo ajudar mais pessoas",
-      image_url: require("../../../assets/icons/illustration_specialist.png"),
-      image_url_hover: require("../../../assets/icons/illustration_specialist_selected.png"),
-    },
-  ]);
 
   const handleSelectItem = (value: string) => {
     setSelectedItems([value]);
@@ -92,59 +53,41 @@ const Question1 = () => {
 
   return (
     <>
-      <ScrollView style={styles.container}>
-        <Text style={styles.text}>Pergunta 01 de 05</Text>
-        <Text style={styles.title}>
-          Com qual destes perfis você mais se identifica?
-        </Text>
+      <Container>
+        <Text>Pergunta 01 de 05</Text>
+        <Title>Com qual destes perfis você mais se identifica?</Title>
 
-        {userType.map((type) => (
-          <TouchableOpacity
-            key={type.id}
-            onPress={() => handleSelectItem(type.value)}
-            style={
-              selectedItems.includes(type.value)
-                ? styles.card_hover
-                : styles.card
-            }
+        {data.map((info) => (
+          <Card
+            key={info.id}
+            onPress={() => handleSelectItem(info.value)}
+            isClicked={selectedItems.includes(info.value)}
           >
-            <Image
-              style={styles.icon}
+            <Icon
+              resizeMode="contain"
               source={
-                selectedItems.includes(type.value)
-                  ? type.image_url_hover
-                  : type.image_url
+                selectedItems.includes(info.value)
+                  ? info.image_url_hover
+                  : info.image_url
               }
             />
 
-            <View style={styles.containerText}>
-              <Text
-                style={
-                  selectedItems.includes(type.value)
-                    ? styles.title_card_hover
-                    : styles.title_card
-                }
-              >
-                {type.title}
+            <ContainerText>
+              <TitleCard isClicked={selectedItems.includes(info.value)}>
+                {info.title}
+              </TitleCard>
+              <Text isClicked={selectedItems.includes(info.value)}>
+                {info.description}
               </Text>
-              <Text
-                style={
-                  selectedItems.includes(type.value)
-                    ? styles.text_hover
-                    : styles.text
-                }
-              >
-                {type.description}
-              </Text>
-            </View>
-          </TouchableOpacity>
+            </ContainerText>
+          </Card>
         ))}
-      </ScrollView>
-      <View style={styles.containerBottom}>
-        <RectButton onPress={handleSubmit} style={styles.Button}>
-          <Text style={styles.textButton}>PRÓXIMA PERGUNTA</Text>
-        </RectButton>
-      </View>
+      </Container>
+      <ContainerBottom>
+        <Button onPress={handleSubmit}>
+          <ButtonText>PRÓXIMA PERGUNTA</ButtonText>
+        </Button>
+      </ContainerBottom>
     </>
   );
 };

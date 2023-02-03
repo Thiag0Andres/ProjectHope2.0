@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { TextInput, Text, View, ScrollView, Alert } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { iStore } from "../../../store";
 
 import api from "../../../services/api";
-import { styles } from "./styles";
+import {
+  Container,
+  ContainerBottom,
+  Text,
+  Title,
+  Input,
+  Button,
+  ButtonText,
+  SecondaryButton,
+} from "./styles";
 
 const Question3 = () => {
   const navigation = useNavigation();
@@ -18,13 +26,13 @@ const Question3 = () => {
     navigation.navigate("Home");
   };
 
-  async function handleSubmit() {
+  function handleSubmit() {
     const body = {
       age: Number(age),
     };
-    await api
+    api
       .put(`/users/update/${user.id}`, body)
-      .then(async (response) => {
+      .then((response) => {
         //console.log(response.data);
 
         navigation.navigate("Question4");
@@ -41,25 +49,24 @@ const Question3 = () => {
 
   return (
     <>
-      <ScrollView style={styles.container}>
-        <Text style={styles.text}>Pergunta 03 de 05</Text>
-        <Text style={styles.title}>Qual sua idade?</Text>
+      <Container>
+        <Text>Pergunta 03 de 05</Text>
+        <Title>Qual sua idade?</Title>
 
-        <TextInput
-          style={styles.input}
+        <Input
           keyboardType="numeric"
           value={age}
           onChangeText={(text) => setAge(text)}
         />
-      </ScrollView>
-      <View style={styles.containerBottom}>
-        <RectButton onPress={handleSubmit} style={styles.Button}>
-          <Text style={styles.textButton}>PRÓXIMA PERGUNTA</Text>
-        </RectButton>
-        <RectButton onPress={handleNavigateToHome} style={styles.Button2}>
-          <Text style={styles.textButton}>RESPONDER MAIS TARDE</Text>
-        </RectButton>
-      </View>
+      </Container>
+      <ContainerBottom>
+        <Button onPress={handleSubmit}>
+          <ButtonText>PRÓXIMA PERGUNTA</ButtonText>
+        </Button>
+        <SecondaryButton onPress={handleNavigateToHome}>
+          <ButtonText>RESPONDER MAIS TARDE</ButtonText>
+        </SecondaryButton>
+      </ContainerBottom>
     </>
   );
 };

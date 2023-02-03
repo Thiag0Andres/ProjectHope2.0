@@ -1,19 +1,30 @@
 import React, { useState } from "react";
-import { TextInput, Text, View, ScrollView, Alert, Picker } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import { Alert } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { iStore } from "../../../store";
-
 import api from "../../../services/api";
-import { styles } from "./styles";
+import {
+  Container,
+  ContainerBottom,
+  Text,
+  Title,
+  Input,
+  ContentInputSelect,
+  Select,
+  Button,
+  ButtonText,
+  SecondaryButton,
+  TextSelectedItem,
+} from "./styles";
 
 const Question4 = () => {
   const navigation = useNavigation();
   const { user } = useSelector((store: iStore) => store.user);
 
   const [timeWithoutDrugs, setTimeWithoutDrugs] = useState("");
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState();
 
   const handleNavigateToHome = () => {
     navigation.navigate("Home");
@@ -43,40 +54,42 @@ const Question4 = () => {
 
   return (
     <>
-      <ScrollView style={styles.container}>
-        <Text style={styles.text}>Pergunta 04 de 05</Text>
-        <Text style={styles.title}>
-          Há quanto tempo você não utiliza drogas?
-        </Text>
-        <View style={styles.content_input_select}>
-          <TextInput
-            style={styles.input}
+      <Container>
+        <Text>Pergunta 04 de 05</Text>
+        <Title>Há quanto tempo você não utiliza drogas?</Title>
+        <ContentInputSelect>
+          <Input
             keyboardType="numeric"
             value={timeWithoutDrugs}
             onChangeText={(text) => setTimeWithoutDrugs(text)}
           />
-          <Picker
-            style={styles.select}
-            onValueChange={(itemValue, itemIndex) =>
-              setSelectedValue(itemValue)
-            }
-          >
+          <Select onValueChange={(itemValue) => setSelectedValue(itemValue)}>
             <Picker.Item label="" value="" />
-            <Picker.Item label="Dia" value="dia" />
-            <Picker.Item label="Mês" value="mês" />
-            <Picker.Item label="Ano" value="ano" />
+            <Picker.Item
+              label="Dia"
+              value={Number(timeWithoutDrugs) == 1 ? "dia" : "dias"}
+            />
+            <Picker.Item
+              label="Mês"
+              value={Number(timeWithoutDrugs) == 1 ? "mês" : "meses"}
+            />
+            <Picker.Item
+              label="Ano"
+              value={Number(timeWithoutDrugs) == 1 ? "ano" : "anos"}
+            />
             <Picker.Item label="" value="" />
-          </Picker>
-        </View>
-      </ScrollView>
-      <View style={styles.containerBottom}>
-        <RectButton onPress={handleSubmit} style={styles.Button}>
-          <Text style={styles.textButton}>PRÓXIMA PERGUNTA</Text>
-        </RectButton>
-        <RectButton onPress={handleNavigateToHome} style={styles.Button2}>
-          <Text style={styles.textButton}>RESPONDER MAIS TARDE</Text>
-        </RectButton>
-      </View>
+          </Select>
+          <TextSelectedItem>{selectedValue}</TextSelectedItem>
+        </ContentInputSelect>
+      </Container>
+      <ContainerBottom>
+        <Button onPress={handleSubmit}>
+          <ButtonText>PRÓXIMA PERGUNTA</ButtonText>
+        </Button>
+        <SecondaryButton onPress={handleNavigateToHome}>
+          <ButtonText>RESPONDER MAIS TARDE</ButtonText>
+        </SecondaryButton>
+      </ContainerBottom>
     </>
   );
 };

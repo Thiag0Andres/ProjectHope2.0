@@ -1,86 +1,79 @@
-import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
+import Colors from "../../../theme/theme";
+const ColorTheme = Colors["Theme"];
 
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 20,
-  },
+interface IContentClicked {
+  isClicked?: boolean;
+}
 
-  text: {
-    fontSize: 14,
-    color: "#243336",
-    textAlign: "justify",
-    flexWrap: "wrap",
-  },
+export const Container = styled.View`
+  flex: 1;
+  padding: 20px;
+  background-color: ${ColorTheme.White};
+`;
 
-  title: {
-    marginBottom: 20,
-    fontSize: 28,
-    flexWrap: "wrap",
-    fontWeight: "bold",
-    color: "#4507A1",
-  },
+export const Text = styled.Text`
+  color: ${ColorTheme.Grey75};
+  font-size: 14px;
+  flex-wrap: wrap;
+  text-align: justify;
+`;
 
-  card: {
-    flexGrow: 1,
-    flexBasis: 0,
-    margin: 10,
-    padding: 20,
-    borderWidth: 2,
-    borderColor: "#E2EAF1",
-    borderRadius: 9,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+export const Title = styled.Text`
+  color: ${ColorTheme.Primary};
+  font-size: 28px;
+  flex-wrap: wrap;
+  font-weight: bold;
+  margin-bottom: 20px;
+`;
 
-  card_hover: {
-    flexGrow: 1,
-    flexBasis: 0,
-    margin: 10,
-    padding: 20,
-    backgroundColor: "#4507A1",
-    borderRadius: 9,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+export const Card = styled.TouchableOpacity<IContentClicked>`
+  flex-grow: 1;
+  flex-basis: 0;
+  margin-bottom: 10px;
+  padding: 20px;
+  background-color: ${({ isClicked }) =>
+    isClicked ? ColorTheme.Primary : "transparent"};
+  border-color: ${({ isClicked }) =>
+    isClicked ? "transparent" : ColorTheme.Grey};
+  border-radius: 9px;
+  border-width: ${({ isClicked }) => (isClicked ? "0px" : "2px")};
+  align-items: center;
+  justify-content: center;
+`;
 
-  icon: {
-    width: 70,
-    height: 70,
-    resizeMode: "contain",
-  },
+export const Icon = styled.Image`
+  width: 70px;
+  height: 70px;
+`;
 
-  containerBottom: {
-    width: "100%",
-    backgroundColor: "#fff",
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
+export const ContainerBottom = styled.View`
+  width: 100%;
+  padding-horizontal: 20px;
+  background-color: ${ColorTheme.White};
+`;
 
-  Button: {
-    marginTop: 10,
-    height: 50,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20,
-    backgroundColor: "#EDE1FF",
-    borderRadius: 9,
-  },
+export const Button = styled.TouchableOpacity`
+  margin-top: 10px;
+  margin-bottom: 20px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${ColorTheme.Pink};
+  border-radius: 9px;
+`;
 
-  Button2: {
-    height: 50,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 9,
-    marginBottom: 10,
-  },
+export const SecondaryButton = styled.TouchableOpacity`
+  margin-bottom: 10px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+`;
 
-  textButton: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#4507A1",
-  },
-});
+export const ButtonText = styled.Text`
+  color: ${ColorTheme.Primary};
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+`;
